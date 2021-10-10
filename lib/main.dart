@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:v_room_app/Blocs/forget_password_bloc.dart';
+import 'package:v_room_app/Blocs/login_bloc.dart';
+import 'package:v_room_app/Blocs/register_bloc.dart';
 import 'package:v_room_app/screens/splash.dart';
 
 import 'package:v_room_app/utils/ColorsUtils.dart';
@@ -27,22 +32,29 @@ class MyMaterial extends ConsumerWidget {
 
     return ScreenUtilInit(
       designSize: Size(428, 926),
-      builder: () => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        locale: locProvider.appLocal,
-        theme: ThemeData(
-          primaryColor: ColorsUtils.primaryYellow,
-          scaffoldBackgroundColor: ColorsUtils.scaffoldBackgroundColor,
-          fontFamily: FontUtils.CAIRO_FONT,
-        ),
-        supportedLocales: S.delegate.supportedLocales,
-        localizationsDelegates: [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
+      builder: () => MultiBlocProvider(
+        providers: [
+          BlocProvider<RegisterBloc>(create: (_) => RegisterBloc()),
+          BlocProvider<LoginBloc>(create: (_) => LoginBloc()),
+          BlocProvider<ForgetPasswordBloc>(create: (_) => ForgetPasswordBloc()),
         ],
-        home: Splash(),
+        child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          locale: locProvider.appLocal,
+          theme: ThemeData(
+            primaryColor: ColorsUtils.primaryYellow,
+            scaffoldBackgroundColor: ColorsUtils.scaffoldBackgroundColor,
+            fontFamily: FontUtils.CAIRO_FONT,
+          ),
+          supportedLocales: S.delegate.supportedLocales,
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          home: Splash(),
+        ),
       ),
     );
   }

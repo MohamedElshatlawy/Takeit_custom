@@ -12,11 +12,11 @@ import '../ServicesURLs.dart';
 class ApiClient {
   static Map<String, String> headers() {
     var mHeaders = {
-      HttpHeaders.acceptHeader: 'application/json',
+      HttpHeaders.contentTypeHeader: 'application/json',
     };
-    mHeaders["lang"] = SettingsSession.instance().languageCode != null
-        ? SettingsSession.instance().languageCode
-        : "ar";
+    // mHeaders["lang"] = SettingsSession.instance().languageCode != null
+    //     ? SettingsSession.instance().languageCode
+    //     : "ar";
 
     // loading auth token
     if (TokenUtil.getTokenFromMemory().isNotEmpty) {

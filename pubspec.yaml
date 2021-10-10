@@ -48,6 +48,10 @@ dependencies:
   google_fonts: ^2.1.0
   floating_bottom_navigation_bar: ^1.5.2
   flutter_switch: ^0.3.2
+  rxdart: 
+  flutter_bloc: 
+  fluttertoast:
+  get:
 
   flutter_localizations:
     sdk: flutter

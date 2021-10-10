@@ -1,14 +1,14 @@
 {
-    "no_internet_connection":"No internet connection, please check you network and try again",
-    "internal_server_error":"Internal Server Error",
-    "phone":"Phone Number",
-    "password":"Password",
-    "conf_password":"Confirm Password",
-
-    "login":"Login",
-    "forget_password":"Forget Password",
-    "signup_now":"Don't have account ? Signup Now",
-    "signup":"Register",
-    "name":"Name"
-
+    "no_internet_connection": "No internet connection, please check you network and try again",
+    "internal_server_error": "Internal Server Error",
+    "phone": "Phone Number",
+    "password": "Password",
+    "conf_password": "Confirm Password",
+    "login": "Login",
+    "forget_password": "Forget Password",
+    "signup_now": "Don't have account ? Signup Now",
+    "signup": "Register",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "verifiy": "verifiy"
 }

@@ -125,11 +125,31 @@ class S {
     );
   }
 
-  /// `Name`
-  String get name {
+  /// `First Name`
+  String get firstName {
     return Intl.message(
-      'Name',
-      name: 'name',
+      'First Name',
+      name: 'firstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Name`
+  String get lastName {
+    return Intl.message(
+      'Last Name',
+      name: 'lastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `verifiy`
+  String get verifiy {
+    return Intl.message(
+      'verifiy',
+      name: 'verifiy',
       desc: '',
       args: [],
     );

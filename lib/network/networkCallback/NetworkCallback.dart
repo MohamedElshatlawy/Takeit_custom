@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:http/http.dart';
 import 'package:v_room_app/generated/l10n.dart';
+import 'package:v_room_app/models/response/user_model.dart';
 import 'package:v_room_app/network/client/ApiClient.dart';
 import 'package:v_room_app/utils/Enums.dart';
 
@@ -29,19 +29,22 @@ class NetworkCall {
         response = (await ApiClient.deleteRequest(endPoint, queryParams));
       }
 
-      if (response.statusCode == NetworkStatusCodes.OK_200.value) {
+      if (response.statusCode == NetworkStatusCodes.OK_200.value ||
+          response.statusCode == NetworkStatusCodes(201).value) {
         //Api logger
         log("Api Response: ${response.body}");
-        return jsonDecode(response.body) as Map<String, dynamic>;
+        return {"response": jsonDecode(response.body) as Map<String, dynamic>};
       } else if (response.statusCode ==
               NetworkStatusCodes.ServerInternalError.value ||
           response.statusCode == NetworkStatusCodes.BadRequest.value) {
         //Api logger
+
         print(
             "API Error: ${response.statusCode} - ${response.reasonPhrase} - ${response.body}");
         return {
           "status": false,
           "code": response.statusCode,
+          'response': jsonDecode(response.body) as Map<String, dynamic>,
           "message": S.current.internal_server_error
         };
       } else if (response.statusCode ==
@@ -54,7 +57,7 @@ class NetworkCall {
         return {
           "status": false,
           "code": response.statusCode,
-          "message": result['message']
+          "message": result['title']
         };
       } else {
         //Api logger
