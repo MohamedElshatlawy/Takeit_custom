@@ -1,5 +1,3 @@
-
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferenceManager {
@@ -9,7 +7,6 @@ class PreferenceManager {
   void saveString(String key, String value) async {
     var prefs = await _prefs;
     prefs.setString(key, value);
-
   }
 
   void saveBoolean(String key, bool value) async {

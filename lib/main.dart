@@ -8,16 +8,21 @@ import 'package:get/get.dart';
 import 'package:v_room_app/Blocs/forget_password_bloc.dart';
 import 'package:v_room_app/Blocs/login_bloc.dart';
 import 'package:v_room_app/Blocs/register_bloc.dart';
+import 'package:v_room_app/screens/home.dart';
 import 'package:v_room_app/screens/splash.dart';
-
 import 'package:v_room_app/utils/ColorsUtils.dart';
 import 'package:v_room_app/utils/FontsUtils.dart';
+import 'package:v_room_app/utils/PreferenceManger.dart';
+import 'package:v_room_app/utils/TokenUtil.dart';
 import 'package:v_room_app/viewModel/locale/localizationProvider.dart';
 import 'generated/l10n.dart';
 
+var logined;
+
 main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  logined = TokenUtil.loadTokenToMemory();
+  print('${logined}');
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
@@ -29,7 +34,6 @@ class MyMaterial extends ConsumerWidget {
   @override
   Widget build(BuildContext context, watch) {
     var locProvider = watch(localProvider);
-
     return ScreenUtilInit(
       designSize: Size(428, 926),
       builder: () => MultiBlocProvider(
@@ -53,7 +57,7 @@ class MyMaterial extends ConsumerWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: Splash(),
+          home: logined != '' ? Home() : Splash(),
         ),
       ),
     );

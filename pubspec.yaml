@@ -52,6 +52,7 @@ dependencies:
   flutter_bloc: 
   fluttertoast:
   get:
+  carousel_pro:
 
   flutter_localizations:
     sdk: flutter

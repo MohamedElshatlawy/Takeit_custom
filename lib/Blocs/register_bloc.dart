@@ -6,8 +6,8 @@ import 'package:v_room_app/App/app_event.dart';
 import 'package:v_room_app/App/app_state.dart';
 import 'package:v_room_app/models/response/user_model.dart';
 import 'package:v_room_app/repository/user_repository.dart';
-import 'package:v_room_app/screens/auth/login.dart';
 import 'package:v_room_app/screens/auth/verification_code.dart';
+import 'package:v_room_app/screens/home.dart';
 import 'package:v_room_app/utils/PreferenceManger.dart';
 
 class RegisterBloc extends Bloc<AppEvent, AppState> {
@@ -85,7 +85,7 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
         } else {
           Fluttertoast.showToast(msg: 'Activation Done');
           yield Done();
-          Get.offAll(() => Login());
+          Get.offAll(() => Home());
         }
       } catch (error) {
         print(error);

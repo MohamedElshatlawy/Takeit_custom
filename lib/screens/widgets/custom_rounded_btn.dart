@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
 
 class CustomRoundedButton extends StatelessWidget {
@@ -41,8 +42,11 @@ class CustomRoundedButton extends StatelessWidget {
           ),
         ),
         child: load
-            ? CircularProgressIndicator(
-                color: Colors.white,
+            ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
               )
             : iconLeft
                 ? Row(
