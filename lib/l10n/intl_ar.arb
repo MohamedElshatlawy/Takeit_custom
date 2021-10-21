@@ -10,5 +10,6 @@
     "signup": "تسجيل",
     "firstName": "الاسم الاول",
     "lastName": "الاسم التاني",
-    "verifiy": "حفظ"
+    "verifiy": "حفظ",
+    "logoImage": "assets/images/logo.jpg"
 }

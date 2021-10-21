@@ -7,6 +7,7 @@ import 'package:v_room_app/App/app_state.dart';
 import 'package:v_room_app/models/response/login_model.dart';
 import 'package:v_room_app/repository/user_repository.dart';
 import 'package:v_room_app/screens/home.dart';
+import 'package:v_room_app/utils/PreferenceManger.dart';
 import 'package:v_room_app/utils/TokenUtil.dart';
 
 class LoginBloc extends Bloc<AppEvent, AppState> {
@@ -43,7 +44,8 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
           yield Start();
         } else {
           Fluttertoast.showToast(msg: respose.responseModel.userType);
-          TokenUtil.saveToken('token');
+          PreferenceManager.getInstance()
+              .saveString('token', respose.responseModel.idToken);
           yield Done();
           Get.offAll(() => Home());
         }

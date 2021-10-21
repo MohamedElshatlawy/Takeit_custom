@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(
-                        'assets/images/logo.jpg',
+                        S.current.logoImage,
                         scale: 4.5,
                       ),
                       SizedBox(

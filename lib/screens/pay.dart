@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/widgets/custom_appbar.dart';
 import 'package:v_room_app/screens/widgets/custom_text.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
@@ -11,25 +12,21 @@ class Pay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          child: CustomAppBar(
-            title: 'الدفع',
-            leading: [
-              IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  textDirection: TextDirection.ltr,
-                  color: ColorsUtils.whiteColor,
-                ),
-              ),
-            ],
-            backgroundColor: ColorsUtils.primaryGreen,
+      appBar: CustomAppBar(
+        title: 'الدفع',
+        leading: [
+          IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_forward_ios_outlined,
+              textDirection: TextDirection.ltr,
+              color: ColorsUtils.whiteColor,
+            ),
           ),
-          preferredSize: Size.fromHeight(80.h)),
-     
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -79,7 +76,7 @@ class Pay extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerRight,
                               child: Image.asset(
-                                'assets/images/logo.jpg',
+                                S.current.logoImage,
                                 fit: BoxFit.fill,
                                 height: 50.h,
                                 width: 50.w,

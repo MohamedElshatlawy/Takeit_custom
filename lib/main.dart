@@ -5,35 +5,49 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:v_room_app/Blocs/forget_password_bloc.dart';
+import 'package:v_room_app/Blocs/language_bloc.dart';
 import 'package:v_room_app/Blocs/login_bloc.dart';
 import 'package:v_room_app/Blocs/register_bloc.dart';
 import 'package:v_room_app/screens/home.dart';
 import 'package:v_room_app/screens/splash.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
+import 'package:v_room_app/utils/Constants.dart';
 import 'package:v_room_app/utils/FontsUtils.dart';
 import 'package:v_room_app/utils/PreferenceManger.dart';
 import 'package:v_room_app/utils/TokenUtil.dart';
+import 'package:v_room_app/viewModel/locale/appLocalization.dart';
 import 'package:v_room_app/viewModel/locale/localizationProvider.dart';
 import 'generated/l10n.dart';
 
-var logined;
-
 main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  logined = TokenUtil.loadTokenToMemory();
-  print('${logined}');
+  var prefs = await SharedPreferences.getInstance();
+  var token = await PreferenceManager.getInstance().getString('token');
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
 
-  runApp(ProviderScope(child: MyMaterial()));
+  runApp(ProviderScope(
+      child: MyMaterial(
+    localeApp: prefs.getString(Constants.languageCode),
+    token: token,
+  )));
 }
 
 class MyMaterial extends ConsumerWidget {
+  var localeApp;
+  var token;
+
+  MyMaterial({this.localeApp, this.token});
   @override
   Widget build(BuildContext context, watch) {
+    print('${localeApp}');
+    print('${token}');
     var locProvider = watch(localProvider);
+    print(locProvider.appLocal);
     return ScreenUtilInit(
       designSize: Size(428, 926),
       builder: () => MultiBlocProvider(
@@ -41,10 +55,11 @@ class MyMaterial extends ConsumerWidget {
           BlocProvider<RegisterBloc>(create: (_) => RegisterBloc()),
           BlocProvider<LoginBloc>(create: (_) => LoginBloc()),
           BlocProvider<ForgetPasswordBloc>(create: (_) => ForgetPasswordBloc()),
+          BlocProvider<LanguageBloc>(create: (_) => LanguageBloc()),
         ],
         child: GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          locale: locProvider.appLocal,
+          debugShowCheckedModeBanner: true,
+          locale: Locale(localeApp.toString()),
           theme: ThemeData(
             primaryColor: ColorsUtils.primaryYellow,
             scaffoldBackgroundColor: ColorsUtils.scaffoldBackgroundColor,
@@ -57,7 +72,7 @@ class MyMaterial extends ConsumerWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: logined != '' ? Home() : Splash(),
+          home: token != '' ? Home() : Splash(),
         ),
       ),
     );

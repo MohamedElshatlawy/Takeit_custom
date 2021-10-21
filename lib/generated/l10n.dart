@@ -154,6 +154,16 @@ class S {
       args: [],
     );
   }
+
+  /// `assets/images/LogoEnglish.jpg`
+  String get logoImage {
+    return Intl.message(
+      'assets/images/LogoEnglish.jpg',
+      name: 'logoImage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

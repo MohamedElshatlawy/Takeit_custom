@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/auth/login.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
 
@@ -25,7 +26,7 @@ class _SplashState extends State<Splash> {
       backgroundColor: ColorsUtils.appBackground,
       body: Center(
         child: Image.asset(
-          'assets/images/logo.jpg',
+          S.current.logoImage,
           scale: 4,
         ),
       ),

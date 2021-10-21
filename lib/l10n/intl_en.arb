@@ -10,5 +10,6 @@
     "signup": "Register",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "verifiy": "verifiy"
+    "verifiy": "verifiy",
+    "logoImage": "assets/images/LogoEnglish.jpg"
 }

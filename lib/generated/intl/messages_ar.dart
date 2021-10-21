@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "internal_server_error" : MessageLookupByLibrary.simpleMessage("يوجد خطأ داخلي حاول مرة اخرى"),
     "lastName" : MessageLookupByLibrary.simpleMessage("الاسم التاني"),
     "login" : MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "logoImage" : MessageLookupByLibrary.simpleMessage("assets/images/logo.jpg"),
     "no_internet_connection" : MessageLookupByLibrary.simpleMessage("لا يوجد اتصال بالإنترنت ، يرجى التحقق من الإتصال والمحاولة مرة أخرى"),
     "password" : MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "phone" : MessageLookupByLibrary.simpleMessage("رقم الجوال"),

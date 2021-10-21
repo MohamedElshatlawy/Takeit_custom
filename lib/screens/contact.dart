@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/widgets/custom_appbar.dart';
 import 'package:v_room_app/screens/widgets/custom_text.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
@@ -11,24 +12,9 @@ class Contact extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          child: CustomAppBar(
-            title: 'رجوع',
-            leading: [
-              IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  textDirection: TextDirection.ltr,
-                  color: ColorsUtils.whiteColor,
-                ),
-              ),
-            ],
-            backgroundColor: ColorsUtils.primaryGreen,
-          ),
-          preferredSize: Size.fromHeight(80.h)),
+      appBar: CustomAppBar(
+        title: 'رجوع',
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -36,12 +22,13 @@ class Contact extends StatelessWidget {
               height: 250.h,
               width: double.infinity,
               child: Image.asset(
-                'assets/images/logo.jpg',
+                S.current.logoImage,
                 fit: BoxFit.fill,
               ),
             ),
-             CustomText(text:
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+            CustomText(
+              text:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             ),
             Padding(
               padding: const EdgeInsets.only(top: 25),
@@ -59,7 +46,7 @@ class Contact extends StatelessWidget {
                             border:
                                 Border.all(color: ColorsUtils.greyTextColor)),
                       ),
-                      CustomText(text:'Takeit'),
+                      CustomText(text: 'Takeit'),
                     ],
                   ),
                   SizedBox(
@@ -71,7 +58,7 @@ class Contact extends StatelessWidget {
                         Icons.facebook_outlined,
                         size: 70.h,
                       ),
-                       CustomText(text:'Takeit'),
+                      CustomText(text: 'Takeit'),
                     ],
                   )
                 ],

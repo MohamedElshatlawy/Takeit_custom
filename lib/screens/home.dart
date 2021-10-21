@@ -3,49 +3,48 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:restart_app/restart_app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/customDrawer.dart';
+import 'package:v_room_app/screens/details.dart';
+import 'package:v_room_app/screens/widgets/custom_appbar.dart';
 import 'package:v_room_app/screens/widgets/custom_rounded_btn.dart';
 import 'package:v_room_app/screens/widgets/custom_textfield.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
+import 'package:get/get.dart';
+import 'package:v_room_app/utils/Constants.dart';
+import 'package:v_room_app/utils/PreferenceManger.dart';
+import 'package:v_room_app/viewModel/locale/localizationProvider.dart';
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with TickerProviderStateMixin {
+class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final items = List<String>.generate(20, (i) => 'Item ${i + 1}');
   GoogleMapController mapController;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: ColorsUtils.appBackground,
-      appBar: AppBar(
-        flexibleSpace: SizedBox(
-          width: 5,
-        ),
-        backgroundColor: ColorsUtils.primaryGreen,
-        title: Text('Takeit', style: TextStyle(color: Colors.white)),
+      appBar: CustomAppBar(
         centerTitle: true,
-        leadingWidth: 100,
-        leading: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              onPressed: () {
-                _scaffoldKey.currentState.openDrawer();
-              },
-              icon: Icon(Icons.format_list_bulleted, color: Colors.white),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.search, color: Colors.white),
-            ),
-          ],
-        ),
+        leading: [
+          IconButton(
+            onPressed: () async {
+              _scaffoldKey.currentState.openDrawer();
+            },
+            icon: Icon(Icons.format_list_bulleted, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search, color: Colors.white),
+          ),
+        ],
         actions: [
           IconButton(
             onPressed: () {
@@ -91,6 +90,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             icon: Icon(Icons.filter_alt_outlined, color: Colors.white),
           ),
         ],
+        title: 'Takeit',
+        leadingWidth: 100,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -110,7 +111,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
-                    'assets/images/logo.jpg',
+                    S.current.logoImage,
                     fit: BoxFit.fill,
                   ),
                   Image.asset(
@@ -155,7 +156,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     width: 10.w,
                   ),
                   CustomRoundedButton(
-                    pressed: () {},
+                    pressed: () async {},
                     textColor: Colors.white,
                     text: 'المطاعم',
                     load: false,
@@ -207,6 +208,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         border: Border(
                             bottom: BorderSide(color: Colors.grey[400]))),
                     child: ListTile(
+                      onTap: () {
+                        Get.to(() => Details());
+                      },
                       subtitle: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,7 +246,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         ],
                       ),
                       leading: Image.asset(
-                        'assets/images/logo.jpg',
+                        S.current.logoImage,
                       ),
                     ),
                   ),

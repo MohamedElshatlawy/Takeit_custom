@@ -28,7 +28,7 @@ class ForgetPassword extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(
-                        'assets/images/logo.jpg',
+                        S.current.logoImage,
                         scale: 4.5,
                       ),
                       SizedBox(

@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "internal_server_error" : MessageLookupByLibrary.simpleMessage("Internal Server Error"),
     "lastName" : MessageLookupByLibrary.simpleMessage("Last Name"),
     "login" : MessageLookupByLibrary.simpleMessage("Login"),
+    "logoImage" : MessageLookupByLibrary.simpleMessage("assets/images/LogoEnglish.jpg"),
     "no_internet_connection" : MessageLookupByLibrary.simpleMessage("No internet connection, please check you network and try again"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),
     "phone" : MessageLookupByLibrary.simpleMessage("Phone Number"),

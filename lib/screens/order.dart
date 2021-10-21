@@ -9,24 +9,9 @@ class Order extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            child: CustomAppBar(
-              title: 'طلباتي',
-              leading: [
-                IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    textDirection: TextDirection.ltr,
-                    color: ColorsUtils.whiteColor,
-                  ),
-                ),
-              ],
-              backgroundColor: ColorsUtils.primaryGreen,
-            ),
-            preferredSize: Size.fromHeight(80.h)),
+        appBar: CustomAppBar(
+          title: 'طلباتي',
+        ),
         body: ListView.builder(
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
