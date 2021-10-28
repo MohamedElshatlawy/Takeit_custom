@@ -21,7 +21,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "all" : MessageLookupByLibrary.simpleMessage("All"),
+    "aribianFood" : MessageLookupByLibrary.simpleMessage("Arabian Food"),
+    "booking" : MessageLookupByLibrary.simpleMessage("Book Now"),
     "conf_password" : MessageLookupByLibrary.simpleMessage("Confirm Password"),
+    "fastFood" : MessageLookupByLibrary.simpleMessage("Fast Food"),
     "firstName" : MessageLookupByLibrary.simpleMessage("First Name"),
     "forget_password" : MessageLookupByLibrary.simpleMessage("Forget Password"),
     "internal_server_error" : MessageLookupByLibrary.simpleMessage("Internal Server Error"),
@@ -31,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_internet_connection" : MessageLookupByLibrary.simpleMessage("No internet connection, please check you network and try again"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),
     "phone" : MessageLookupByLibrary.simpleMessage("Phone Number"),
+    "sandwiches" : MessageLookupByLibrary.simpleMessage("Sandwiches"),
     "signup" : MessageLookupByLibrary.simpleMessage("Register"),
     "signup_now" : MessageLookupByLibrary.simpleMessage("Don\'t have account ? Signup Now"),
     "verifiy" : MessageLookupByLibrary.simpleMessage("verifiy")

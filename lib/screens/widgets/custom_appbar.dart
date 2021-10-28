@@ -42,8 +42,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 Get.back();
               },
               icon: Icon(
-                Icons.arrow_forward_ios,
-                textDirection: TextDirection.ltr,
+                Icons.arrow_back_ios_new,
+                // textDirection: TextDirection.ltr,
                 color: ColorsUtils.whiteColor,
               ))
           : Row(

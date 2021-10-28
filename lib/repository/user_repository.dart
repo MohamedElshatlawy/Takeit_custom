@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:v_room_app/models/response/login_model.dart';
+import 'package:v_room_app/models/response/map_model.dart';
+import 'package:v_room_app/models/response/resturant_model.dart';
 import 'package:v_room_app/models/response/user_model.dart';
 import 'package:v_room_app/network/networkCallback/NetworkCallback.dart';
 import 'package:v_room_app/utils/Enums.dart';
@@ -65,6 +67,36 @@ class UserRepository {
       endPoint: 'api/account/reset-password/finish',
       method: HttpMethod.POST,
       requestBody: data,
+    ));
+  }
+
+  Future<MapListModel> getLatLogMap(String latLong) async {
+    Map<String, dynamic> data = {
+      "latlong": latLong,
+    };
+    print(await NetworkCall.makeCall(
+      endPoint: 'api/restaurants/nearest',
+      method: HttpMethod.GET,
+      queryParams: data,
+    ));
+    return MapListModel.fromJson(await NetworkCall.makeCall(
+      endPoint: 'api/restaurants/nearest',
+      method: HttpMethod.GET,
+      queryParams: data,
+    ));
+  }
+
+  Future<ResturantModel> resturantRequest(String resturantId) async {
+    return ResturantModel.fromJson(await NetworkCall.makeCall(
+      endPoint: 'api/restaurants/${resturantId}',
+      method: HttpMethod.GET,
+    ));
+  }
+
+  Future<MapListModel> filtterRequest() async {
+    return MapListModel.fromJson(await NetworkCall.makeCall(
+      endPoint: 'api/cuisines',
+      method: HttpMethod.GET,
     ));
   }
 }

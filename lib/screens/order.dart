@@ -56,6 +56,7 @@ class Order extends StatelessWidget {
                               width: double.infinity,
                               color: Colors.white,
                               child: ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: 3,
                                   itemBuilder: (context, index) {

@@ -11,5 +11,10 @@
     "firstName": "الاسم الاول",
     "lastName": "الاسم التاني",
     "verifiy": "حفظ",
-    "logoImage": "assets/images/logo.jpg"
+    "logoImage": "assets/images/logo.jpg",
+    "all": "الكل",
+    "fastFood": "وجيات سريعة",
+    "sandwiches": "ساندوتشات",
+    "aribianFood": "وجبات عربية",
+    "booking": "حجز"
 }

@@ -6,7 +6,7 @@ class CustomListTitle extends StatelessWidget {
   final bool dense;
   final Function onTap;
   final IconData iconData;
-  final Widget trailing;
+  final Widget trailing, leading;
   CustomListTitle({
     Key key,
     this.title,
@@ -15,6 +15,7 @@ class CustomListTitle extends StatelessWidget {
     this.iconData,
     this.subTitle,
     this.trailing,
+    this.leading,
   });
 
   @override
@@ -26,11 +27,12 @@ class CustomListTitle extends StatelessWidget {
         style: TextStyle(color: ColorsUtils.primaryGreen),
       ),
       dense: dense,
-      leading: Icon(
-            iconData,
-            color: ColorsUtils.primaryGreen,
-          ) ??
-          null,
+      leading: iconData != null
+          ? Icon(
+              iconData,
+              color: ColorsUtils.primaryGreen,
+            )
+          : leading,
       onTap: onTap ?? () {},
       subtitle: subTitle == null ? null : Text(subTitle),
       trailing: trailing,

@@ -8,7 +8,6 @@ import 'package:v_room_app/models/response/login_model.dart';
 import 'package:v_room_app/repository/user_repository.dart';
 import 'package:v_room_app/screens/home.dart';
 import 'package:v_room_app/utils/PreferenceManger.dart';
-import 'package:v_room_app/utils/TokenUtil.dart';
 
 class LoginBloc extends Bloc<AppEvent, AppState> {
   final _userName = BehaviorSubject<String>();

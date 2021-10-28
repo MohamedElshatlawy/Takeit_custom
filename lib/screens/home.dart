@@ -1,31 +1,45 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:restart_app/restart_app.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:v_room_app/App/app_event.dart';
+import 'package:v_room_app/App/app_state.dart';
+import 'package:v_room_app/Blocs/home_bloc.dart';
 import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/customDrawer.dart';
-import 'package:v_room_app/screens/details.dart';
+import 'package:v_room_app/screens/googleMap.dart';
+import 'package:v_room_app/screens/resturantDetail.dart';
+import 'package:v_room_app/screens/widgets/calculate_distance.dart';
 import 'package:v_room_app/screens/widgets/custom_appbar.dart';
 import 'package:v_room_app/screens/widgets/custom_rounded_btn.dart';
-import 'package:v_room_app/screens/widgets/custom_textfield.dart';
+import 'package:v_room_app/screens/widgets/custom_text.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
 import 'package:get/get.dart';
-import 'package:v_room_app/utils/Constants.dart';
-import 'package:v_room_app/utils/PreferenceManger.dart';
-import 'package:v_room_app/viewModel/locale/localizationProvider.dart';
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final items = List<String>.generate(20, (i) => 'Item ${i + 1}');
   GoogleMapController mapController;
+  var currentLocation;
+  int tappedIndex;
+  var intianlCameraPosition = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+  @override
+  void initState() {
+    tappedIndex = 0;
+    context.read<HomeBloc>().add(Filter(data: 1));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,11 +74,7 @@ class _HomeState extends State<Home> {
                       height: 400,
                       child: GoogleMap(
                         myLocationEnabled: true,
-                        initialCameraPosition: CameraPosition(
-                            target:
-                                LatLng(37.42796133580664, -122.085749655962),
-                            zoom: 14.4746,
-                            bearing: 0),
+                        initialCameraPosition: intianlCameraPosition,
                         onMapCreated: (GoogleMapController controller) {
                           mapController = controller;
                         },
@@ -73,7 +83,11 @@ class _HomeState extends State<Home> {
                   ),
                   actions: <Widget>[
                     CustomRoundedButton(
-                      pressed: () {},
+                      pressed: () {
+                        mapController.animateCamera(
+                            CameraUpdate.newCameraPosition(
+                                intianlCameraPosition));
+                      },
                       textColor: ColorsUtils.primaryGreen,
                       text: 'استخدم هذا الموقع',
                       load: false,
@@ -86,7 +100,9 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.location_on_outlined, color: Colors.white),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => Maps());
+            },
             icon: Icon(Icons.filter_alt_outlined, color: Colors.white),
           ),
         ],
@@ -129,130 +145,151 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 50.h,
-                      child: CustomTextField(
-                        lablel: 'عن ماذا تبحث',
-                        sufficIcon: Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: Colors.grey[400],
-                          ),
-                          child: Icon(
-                            Icons.close,
-                            size: 15,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  CustomRoundedButton(
-                    pressed: () async {},
-                    textColor: Colors.white,
-                    text: 'المطاعم',
-                    load: false,
-                    backgroundColor: ColorsUtils.primaryGreen,
-                    borderColor: ColorsUtils.primaryGreen,
-                    height: 50.h,
-                    width: 80.w,
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  CustomRoundedButton(
-                    pressed: () {},
-                    textColor: ColorsUtils.primaryGreen,
-                    text: 'الاصناف',
-                    load: false,
-                    backgroundColor: ColorsUtils.whiteColor,
-                    borderColor: ColorsUtils.primaryGreen,
-                    height: 50.h,
-                    width: 80.w,
-                  ),
-                ],
-              ),
+            SizedBox(
+              height: 30.h,
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return Dismissible(
-                  key: UniqueKey(),
-                  background: Container(
-                    color: Color(0xFFeeeaf0),
-                    child: IconButton(
-                        alignment: Alignment.centerRight,
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.favorite,
-                          color: Color(0xFF898589),
-                        )),
-                  ),
-                  onDismissed: (direction) {
-                    if (direction == DismissDirection.startToEnd) {
-                      print("Add to favorite");
-                    }
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(color: Colors.grey[400]))),
-                    child: ListTile(
-                      onTap: () {
-                        Get.to(() => Details());
-                      },
-                      subtitle: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('subtitle'),
-                          Row(
-                            children: [
-                              Text(
-                                '03:00 AM',
-                              ),
-                              Text('03:00 AM'),
-                            ],
-                          ),
-                        ],
-                      ),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Column(
-                            children: [
-                              Text('title'),
-                              Text('title'),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.location_on_outlined),
-                              Text('3.0'),
-                            ],
-                          ),
-                        ],
-                      ),
-                      leading: Image.asset(
-                        S.current.logoImage,
+            BlocBuilder<HomeBloc, AppState>(builder: (_, state) {
+              if (state is Loaded) {
+                var userInfo = context.read<HomeBloc>().resultSearch;
+                print('tttttttt${userInfo}');
+                var listItem = state;
+                return Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 80.h,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        children: List.generate(
+                            state.mapModel.responseModel.length,
+                            (index) => Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CustomRoundedButton(
+                                    backgroundColor: tappedIndex == index
+                                        ? ColorsUtils.primaryGreen
+                                        : Colors.transparent,
+                                    textColor: tappedIndex == index
+                                        ? ColorsUtils.whiteColor
+                                        : ColorsUtils.primaryGreen,
+                                    width: 90.w,
+                                    pressed: () {
+                                      print(
+                                          "uuuuuuuuuuuuu${state.mapModel.responseModel[index].id}");
+                                      context.read<HomeBloc>().add(Filter(
+                                          data: state.mapModel
+                                              .responseModel[index].id));
+                                      setState(() {
+                                        tappedIndex = index;
+                                      });
+                                      print('ssssssssssss${index}');
+                                    },
+                                    text: state
+                                        .mapModel.responseModel[index].name,
+                                    load: false,
+                                  ),
+                                )),
                       ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    userInfo.isNotEmpty
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            itemCount: userInfo.length,
+                            itemBuilder: (context, index) {
+                              var timeFormate =
+                                  userInfo[index].workingHours.from;
+                              List fromTimeformate = timeFormate.split(':');
+                              var timeFormateTo =
+                                  userInfo[index].workingHours.to;
+                              List toTimeformate = timeFormateTo.split(':');
+
+                              return Dismissible(
+                                key: UniqueKey(),
+                                background: Container(
+                                  color: Color(0xFFeeeaf0),
+                                  child: IconButton(
+                                      alignment: Alignment.centerRight,
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.favorite,
+                                        color: Color(0xFF898589),
+                                      )),
+                                ),
+                                onDismissed: (direction) {
+                                  if (direction ==
+                                      DismissDirection.startToEnd) {
+                                    print("Add to favorite");
+                                  }
+                                },
+                                child: Card(
+                                  margin: EdgeInsets.all(10),
+                                  child: ListTile(
+                                    contentPadding: EdgeInsets.all(10),
+                                    onTap: () {
+                                      Get.to(() => ResturantDetails(
+                                            restruanId: userInfo[index],
+                                          ));
+                                    },
+                                    subtitle: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            "From : ${fromTimeformate[0]}:${fromTimeformate[1]} AM"),
+                                        Text(
+                                            "To :${toTimeformate[0]}:${toTimeformate[1]} PM"),
+                                      ],
+                                    ),
+                                    title: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(userInfo[index].name),
+                                        CustomRoundedButton(
+                                          backgroundColor: Colors.transparent,
+                                          load: false,
+                                          iconLeft: true,
+                                          icon:
+                                              Icon(Icons.location_on_outlined),
+                                          text:
+                                              "${calculateDistance(24.728486, 46.649050, double.parse(userInfo[index].location.split(',').first), double.parse(userInfo[index].location.split(',').last)).toStringAsFixed(0)} KM",
+                                        )
+                                      ],
+                                    ),
+                                    minLeadingWidth: 70.w,
+                                    leading: Image.asset(
+                                      S.current.logoImage,
+                                      width: 70.w,
+                                      height: double.infinity,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                        : Container(
+                            margin: EdgeInsets.symmetric(vertical: 100),
+                            child: CustomText(
+                              text: 'Not Found Item',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30.sp,
+                            )),
+                  ],
                 );
-              },
-            ),
+              }
+              return Container(
+                  padding: EdgeInsets.symmetric(vertical: 270.h),
+                  child: CircularProgressIndicator(
+                    color: ColorsUtils.primaryGreen,
+                  ));
+            }),
           ],
         ),
       ),

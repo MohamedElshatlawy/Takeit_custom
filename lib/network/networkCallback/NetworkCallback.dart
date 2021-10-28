@@ -33,7 +33,7 @@ class NetworkCall {
           response.statusCode == NetworkStatusCodes(201).value) {
         //Api logger
         log("Api Response: ${response.body}");
-        return {"response": jsonDecode(response.body) as Map<String, dynamic>};
+        return {"response": jsonDecode(response.body)};
       } else if (response.statusCode ==
               NetworkStatusCodes.ServerInternalError.value ||
           response.statusCode == NetworkStatusCodes.BadRequest.value) {

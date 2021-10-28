@@ -21,7 +21,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "all" : MessageLookupByLibrary.simpleMessage("الكل"),
+    "aribianFood" : MessageLookupByLibrary.simpleMessage("وجبات عربية"),
+    "booking" : MessageLookupByLibrary.simpleMessage("حجز"),
     "conf_password" : MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+    "fastFood" : MessageLookupByLibrary.simpleMessage("وجيات سريعة"),
     "firstName" : MessageLookupByLibrary.simpleMessage("الاسم الاول"),
     "forget_password" : MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
     "internal_server_error" : MessageLookupByLibrary.simpleMessage("يوجد خطأ داخلي حاول مرة اخرى"),
@@ -31,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_internet_connection" : MessageLookupByLibrary.simpleMessage("لا يوجد اتصال بالإنترنت ، يرجى التحقق من الإتصال والمحاولة مرة أخرى"),
     "password" : MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "phone" : MessageLookupByLibrary.simpleMessage("رقم الجوال"),
+    "sandwiches" : MessageLookupByLibrary.simpleMessage("ساندوتشات"),
     "signup" : MessageLookupByLibrary.simpleMessage("تسجيل"),
     "signup_now" : MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ سجل الان"),
     "verifiy" : MessageLookupByLibrary.simpleMessage("حفظ")

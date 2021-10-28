@@ -7,9 +7,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:v_room_app/Blocs/forget_password_bloc.dart';
-import 'package:v_room_app/Blocs/language_bloc.dart';
+import 'package:v_room_app/Blocs/home_bloc.dart';
 import 'package:v_room_app/Blocs/login_bloc.dart';
 import 'package:v_room_app/Blocs/register_bloc.dart';
+import 'package:v_room_app/Blocs/resturant_bloc.dart';
 import 'package:v_room_app/screens/home.dart';
 import 'package:v_room_app/screens/splash.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
@@ -55,7 +56,8 @@ class MyMaterial extends ConsumerWidget {
           BlocProvider<RegisterBloc>(create: (_) => RegisterBloc()),
           BlocProvider<LoginBloc>(create: (_) => LoginBloc()),
           BlocProvider<ForgetPasswordBloc>(create: (_) => ForgetPasswordBloc()),
-          BlocProvider<LanguageBloc>(create: (_) => LanguageBloc()),
+          BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
+          BlocProvider<ResturantBloc>(create: (_) => ResturantBloc()),
         ],
         child: GetMaterialApp(
           debugShowCheckedModeBanner: true,

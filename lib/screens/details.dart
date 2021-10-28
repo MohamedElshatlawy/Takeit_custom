@@ -5,6 +5,9 @@ import 'package:v_room_app/utils/ColorsUtils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Details extends StatefulWidget {
+  final int resturantId;
+
+  const Details({Key key, this.resturantId}) : super(key: key);
   @override
   _DetailsState createState() => _DetailsState();
 }
@@ -26,6 +29,7 @@ class _DetailsState extends State<Details> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.resturantId);
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: ColorsUtils.filledColor,
