@@ -29,6 +29,8 @@ class ColorsUtils {
 
   static const primaryYellow = Color(0xffFAD530);
   static const scaffoldBackgroundColor = Color(0xffF5F8FD);
+  static const arabicBackgroundColor = Color(0xfff8f8f8);
+  static const englishBackgroundColor = Color(0xffffffff);
   static const authBorder = Color(0xff9A9C9F);
   static const carColor = Color(0xffE7ECF4);
   static const successColor = Color(0xff56BE72);

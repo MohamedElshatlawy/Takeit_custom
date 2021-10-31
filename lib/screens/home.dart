@@ -6,12 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:v_room_app/App/app_event.dart';
 import 'package:v_room_app/App/app_state.dart';
-import 'package:v_room_app/Blocs/home_bloc.dart';
+import 'package:v_room_app/Blocs/availableTimeHome_bloc.dart';
 import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/customDrawer.dart';
 import 'package:v_room_app/screens/googleMap.dart';
-import 'package:v_room_app/screens/resturantDetail.dart';
-import 'package:v_room_app/screens/widgets/calculate_distance.dart';
 import 'package:v_room_app/screens/widgets/custom_appbar.dart';
 import 'package:v_room_app/screens/widgets/custom_rounded_btn.dart';
 import 'package:v_room_app/screens/widgets/custom_text.dart';
@@ -29,6 +27,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   GoogleMapController mapController;
   var currentLocation;
   int tappedIndex;
+  int previousIndex = 0;
+
   var intianlCameraPosition = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
@@ -36,7 +36,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     tappedIndex = 0;
-    context.read<HomeBloc>().add(Filter(data: 1));
+    // context.read<HomeBloc>().add(Filter(data: 1));
+    context.read<AvailableTimeHomeBloc>().add(BookingTime(data: 0, newval: ''));
     super.initState();
   }
 
@@ -111,6 +112,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: 250.h,
@@ -148,148 +150,197 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             SizedBox(
               height: 30.h,
             ),
-            BlocBuilder<HomeBloc, AppState>(builder: (_, state) {
-              if (state is Loaded) {
-                var userInfo = context.read<HomeBloc>().resultSearch;
-                print('tttttttt${userInfo}');
-                var listItem = state;
-                return Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 80.h,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        children: List.generate(
-                            state.mapModel.responseModel.length,
-                            (index) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: CustomRoundedButton(
-                                    backgroundColor: tappedIndex == index
-                                        ? ColorsUtils.primaryGreen
-                                        : Colors.transparent,
-                                    textColor: tappedIndex == index
-                                        ? ColorsUtils.whiteColor
-                                        : ColorsUtils.primaryGreen,
-                                    width: 90.w,
-                                    pressed: () {
-                                      print(
-                                          "uuuuuuuuuuuuu${state.mapModel.responseModel[index].id}");
-                                      context.read<HomeBloc>().add(Filter(
-                                          data: state.mapModel
-                                              .responseModel[index].id));
-                                      setState(() {
-                                        tappedIndex = index;
-                                      });
-                                      print('ssssssssssss${index}');
-                                    },
-                                    text: state
-                                        .mapModel.responseModel[index].name,
-                                    load: false,
-                                  ),
-                                )),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    userInfo.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            physics: BouncingScrollPhysics(),
-                            itemCount: userInfo.length,
-                            itemBuilder: (context, index) {
-                              var timeFormate =
-                                  userInfo[index].workingHours.from;
-                              List fromTimeformate = timeFormate.split(':');
-                              var timeFormateTo =
-                                  userInfo[index].workingHours.to;
-                              List toTimeformate = timeFormateTo.split(':');
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomText(
+                text: S.current.avaliableTime,
+                fontWeight: FontWeight.bold,
+                fontSize: 30.sp,
+              ),
+            ),
 
-                              return Dismissible(
-                                key: UniqueKey(),
-                                background: Container(
-                                  color: Color(0xFFeeeaf0),
-                                  child: IconButton(
-                                      alignment: Alignment.centerRight,
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.favorite,
-                                        color: Color(0xFF898589),
-                                      )),
-                                ),
-                                onDismissed: (direction) {
-                                  if (direction ==
-                                      DismissDirection.startToEnd) {
-                                    print("Add to favorite");
-                                  }
-                                },
-                                child: Card(
-                                  margin: EdgeInsets.all(10),
-                                  child: ListTile(
-                                    contentPadding: EdgeInsets.all(10),
-                                    onTap: () {
-                                      Get.to(() => ResturantDetails(
-                                            restruanId: userInfo[index],
-                                          ));
+            BlocBuilder<AvailableTimeHomeBloc, AppState>(builder: (_, state) {
+              if (state is AvailbleTime) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: state.availbleTime.data.length,
+                    itemBuilder: (context, index) {
+                      return ExpansionTile(
+                          trailing: Checkbox(
+                            value:
+                                state.availbleTime.data[index].selectedRadio !=
+                                    null,
+                            onChanged: null,
+                          ),
+                          title: Text(
+                            state.availbleTime.data[index].name,
+                            style: TextStyle(
+                                fontSize: 16.0, fontWeight: FontWeight.w500),
+                          ),
+                          children: List.generate(
+                              state.availbleTime.data[index].availableTime
+                                  .length,
+                              (i) => RadioListTile(
+                                    value: state.availbleTime.data[index]
+                                        .availableTime[i],
+                                    groupValue: state
+                                        .availbleTime.data[index].selectedRadio,
+                                    onChanged: (newval) {
+                                      context.read<AvailableTimeHomeBloc>().add(
+                                          BookingTime(
+                                              data: index, newval: newval));
                                     },
-                                    subtitle: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                            "From : ${fromTimeformate[0]}:${fromTimeformate[1]} AM"),
-                                        Text(
-                                            "To :${toTimeformate[0]}:${toTimeformate[1]} PM"),
-                                      ],
-                                    ),
-                                    title: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(userInfo[index].name),
-                                        CustomRoundedButton(
-                                          backgroundColor: Colors.transparent,
-                                          load: false,
-                                          iconLeft: true,
-                                          icon:
-                                              Icon(Icons.location_on_outlined),
-                                          text:
-                                              "${calculateDistance(24.728486, 46.649050, double.parse(userInfo[index].location.split(',').first), double.parse(userInfo[index].location.split(',').last)).toStringAsFixed(0)} KM",
-                                        )
-                                      ],
-                                    ),
-                                    minLeadingWidth: 70.w,
-                                    leading: Image.asset(
-                                      S.current.logoImage,
-                                      width: 70.w,
-                                      height: double.infinity,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          )
-                        : Container(
-                            margin: EdgeInsets.symmetric(vertical: 100),
-                            child: CustomText(
-                              text: 'Not Found Item',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30.sp,
-                            )),
-                  ],
-                );
+                                    title: Text(state.availbleTime.data[index]
+                                        .availableTime[i]),
+                                  )).toList());
+                    });
+              } else {
+                return CircularProgressIndicator();
               }
-              return Container(
-                  padding: EdgeInsets.symmetric(vertical: 270.h),
-                  child: CircularProgressIndicator(
-                    color: ColorsUtils.primaryGreen,
-                  ));
-            }),
+            })
+            // BlocBuilder<HomeBloc, AppState>(builder: (_, state) {
+            //   if (state is Loaded) {
+            //     var userInfo = context.read<HomeBloc>().resultSearch;
+            //     print('tttttttt${userInfo}');
+            //     var listItem = state;
+            //     return Column(
+            //       children: [
+            //         Container(
+            //           width: double.infinity,
+            //           height: 80.h,
+            //           child: ListView(
+            //             scrollDirection: Axis.horizontal,
+            //             shrinkWrap: true,
+            //             children: List.generate(
+            //                 state.mapModel.responseModel.length,
+            //                 (index) => Padding(
+            //                       padding: const EdgeInsets.all(8.0),
+            //                       child: CustomRoundedButton(
+            //                         backgroundColor: tappedIndex == index
+            //                             ? ColorsUtils.primaryGreen
+            //                             : Colors.transparent,
+            //                         textColor: tappedIndex == index
+            //                             ? ColorsUtils.whiteColor
+            //                             : ColorsUtils.primaryGreen,
+            //                         width: 90.w,
+            //                         pressed: () {
+            //                           print(
+            //                               "uuuuuuuuuuuuu${state.mapModel.responseModel[index].id}");
+            //                           context.read<HomeBloc>().add(Filter(
+            //                               data: state.mapModel
+            //                                   .responseModel[index].id));
+            //                           setState(() {
+            //                             tappedIndex = index;
+            //                           });
+            //                           print('ssssssssssss${index}');
+            //                         },
+            //                         text: state
+            //                             .mapModel.responseModel[index].name,
+            //                         load: false,
+            //                       ),
+            //                     )),
+            //           ),
+            //         ),
+            //         SizedBox(
+            //           height: 30.h,
+            //         ),
+            //         userInfo.isNotEmpty
+            //             ? ListView.builder(
+            //                 shrinkWrap: true,
+            //                 physics: BouncingScrollPhysics(),
+            //                 itemCount: userInfo.length,
+            //                 itemBuilder: (context, index) {
+            //                   var timeFormate =
+            //                       userInfo[index].workingHours.from;
+            //                   List fromTimeformate = timeFormate.split(':');
+            //                   var timeFormateTo =
+            //                       userInfo[index].workingHours.to;
+            //                   List toTimeformate = timeFormateTo.split(':');
+
+            //                   return Dismissible(
+            //                     key: UniqueKey(),
+            //                     background: Container(
+            //                       color: Color(0xFFeeeaf0),
+            //                       child: IconButton(
+            //                           alignment: Alignment.centerRight,
+            //                           onPressed: () {},
+            //                           icon: Icon(
+            //                             Icons.favorite,
+            //                             color: Color(0xFF898589),
+            //                           )),
+            //                     ),
+            //                     onDismissed: (direction) {
+            //                       if (direction ==
+            //                           DismissDirection.startToEnd) {
+            //                         print("Add to favorite");
+            //                       }
+            //                     },
+            //                     child: Card(
+            //                       margin: EdgeInsets.all(10),
+            //                       child: ListTile(
+            //                         contentPadding: EdgeInsets.all(10),
+            //                         onTap: () {
+            //                           Get.to(() => ResturantDetails(
+            //                                 restruanId: userInfo[index],
+            //                               ));
+            //                         },
+            //                         subtitle: Row(
+            //                           crossAxisAlignment:
+            //                               CrossAxisAlignment.start,
+            //                           mainAxisAlignment:
+            //                               MainAxisAlignment.spaceBetween,
+            //                           children: [
+            //                             Text(
+            //                                 "From : ${fromTimeformate[0]}:${fromTimeformate[1]} AM"),
+            //                             Text(
+            //                                 "To :${toTimeformate[0]}:${toTimeformate[1]} PM"),
+            //                           ],
+            //                         ),
+            //                         title: Row(
+            //                           mainAxisAlignment:
+            //                               MainAxisAlignment.spaceBetween,
+            //                           children: [
+            //                             Text(userInfo[index].name),
+            //                             CustomRoundedButton(
+            //                               backgroundColor: Colors.transparent,
+            //                               load: false,
+            //                               iconLeft: true,
+            //                               icon:
+            //                                   Icon(Icons.location_on_outlined),
+            //                               text:
+            //                                   "${calculateDistance(24.728486, 46.649050, double.parse(userInfo[index].location.split(',').first), double.parse(userInfo[index].location.split(',').last)).toStringAsFixed(0)} KM",
+            //                             )
+            //                           ],
+            //                         ),
+            //                         minLeadingWidth: 70.w,
+            //                         leading: Image.asset(
+            //                           S.current.logoImage,
+            //                           width: 70.w,
+            //                           height: double.infinity,
+            //                           fit: BoxFit.fill,
+            //                         ),
+            //                       ),
+            //                     ),
+            //                   );
+            //                 },
+            //               )
+            //             : Container(
+            //                 margin: EdgeInsets.symmetric(vertical: 100),
+            //                 child: CustomText(
+            //                   text: 'Not Found Item',
+            //                   fontWeight: FontWeight.bold,
+            //                   fontSize: 30.sp,
+            //                 )),
+            //       ],
+            //     );
+            //   }
+            //   return Container(
+            //       padding: EdgeInsets.symmetric(vertical: 270.h),
+            //       child: CircularProgressIndicator(
+            //         color: ColorsUtils.primaryGreen,
+            //       ));
+            // }),
           ],
         ),
       ),

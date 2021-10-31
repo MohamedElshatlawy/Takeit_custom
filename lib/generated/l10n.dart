@@ -214,6 +214,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Available Booking Times`
+  String get avaliableTime {
+    return Intl.message(
+      'Available Booking Times',
+      name: 'avaliableTime',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

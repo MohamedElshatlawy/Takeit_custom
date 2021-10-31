@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "all" : MessageLookupByLibrary.simpleMessage("الكل"),
     "aribianFood" : MessageLookupByLibrary.simpleMessage("وجبات عربية"),
+    "avaliableTime" : MessageLookupByLibrary.simpleMessage("المواعيد المتاحة"),
     "booking" : MessageLookupByLibrary.simpleMessage("حجز"),
     "conf_password" : MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
     "fastFood" : MessageLookupByLibrary.simpleMessage("وجيات سريعة"),

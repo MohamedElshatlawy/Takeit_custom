@@ -16,5 +16,6 @@
     "fastFood": "Fast Food",
     "sandwiches": "Sandwiches",
     "aribianFood": "Arabian Food",
-    "booking": "Book Now"
+    "booking": "Book Now",
+    "avaliableTime": "Available Booking Times"
 }
