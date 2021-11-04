@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_internet_connection" : MessageLookupByLibrary.simpleMessage("No internet connection, please check you network and try again"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),
     "phone" : MessageLookupByLibrary.simpleMessage("Phone Number"),
+    "rememberMe" : MessageLookupByLibrary.simpleMessage("Remember Me"),
     "sandwiches" : MessageLookupByLibrary.simpleMessage("Sandwiches"),
     "signup" : MessageLookupByLibrary.simpleMessage("Register"),
     "signup_now" : MessageLookupByLibrary.simpleMessage("Don\'t have account ? Signup Now"),

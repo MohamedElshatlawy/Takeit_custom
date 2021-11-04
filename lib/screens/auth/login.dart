@@ -67,7 +67,7 @@ class _LoginState extends State<Login> {
                         onChanged: context.read<LoginBloc>().updatePassword,
                       ),
                       CheckboxListTile(
-                        title: Text("تذكيري"),
+                        title: Text(S.current.rememberMe),
                         value: rememberMe,
                         onChanged: (newValue) {
                           setState(() {

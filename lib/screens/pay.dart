@@ -14,18 +14,6 @@ class Pay extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'الدفع',
-        leading: [
-          IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_forward_ios_outlined,
-              textDirection: TextDirection.ltr,
-              color: ColorsUtils.whiteColor,
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

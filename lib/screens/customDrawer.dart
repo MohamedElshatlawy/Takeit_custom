@@ -33,8 +33,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
+      // borderRadius: BorderRadius.only(
+      //     topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
       child: SizedBox(
         height: 850.h,
         width: 230.w,

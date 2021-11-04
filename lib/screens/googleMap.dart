@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:v_room_app/App/app_event.dart';
@@ -32,17 +31,17 @@ class _MapsState extends State<Maps> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _getUserLocation();
+    // _getUserLocation();
     _tabController = TabController(length: 4, vsync: this);
   }
 
-  void _getUserLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      _initialPosition = LatLng(position.latitude, position.longitude);
-    });
-  }
+  // void _getUserLocation() async {
+  //   Position position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high);
+  //   setState(() {
+  //     _initialPosition = LatLng(position.latitude, position.longitude);
+  //   });
+  // }
 
   _onMapCreated(GoogleMapController controller) {
     setState(() {

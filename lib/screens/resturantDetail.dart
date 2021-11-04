@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:v_room_app/App/app_event.dart';
 import 'package:v_room_app/App/app_state.dart';
 import 'package:v_room_app/Blocs/resturant_bloc.dart';
 import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/models/response/map_model.dart';
+import 'package:v_room_app/screens/booking_now.dart';
 import 'package:v_room_app/screens/widgets/CustomListTitle.dart';
 import 'package:v_room_app/screens/widgets/custom_appbar.dart';
 import 'package:v_room_app/screens/widgets/custom_rounded_btn.dart';
@@ -203,6 +205,9 @@ class _ResturantDetailsState extends State<ResturantDetails> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(10.0),
         child: CustomRoundedButton(
+          pressed: () {
+            Get.to(() => BookingNowScreen());
+          },
           height: 50.h,
           backgroundColor: ColorsUtils.primaryGreen,
           textColor: ColorsUtils.whiteColor,

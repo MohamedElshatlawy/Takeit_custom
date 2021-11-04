@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_internet_connection" : MessageLookupByLibrary.simpleMessage("لا يوجد اتصال بالإنترنت ، يرجى التحقق من الإتصال والمحاولة مرة أخرى"),
     "password" : MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "phone" : MessageLookupByLibrary.simpleMessage("رقم الجوال"),
+    "rememberMe" : MessageLookupByLibrary.simpleMessage("تذكيري"),
     "sandwiches" : MessageLookupByLibrary.simpleMessage("ساندوتشات"),
     "signup" : MessageLookupByLibrary.simpleMessage("تسجيل"),
     "signup_now" : MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ سجل الان"),

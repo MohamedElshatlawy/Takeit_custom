@@ -1,3 +1,5 @@
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+
 abstract class AppEvent {}
 
 class Click extends AppEvent {}
@@ -16,3 +18,12 @@ class BookingTime extends AppEvent {
 }
 
 class ActivateCode extends AppEvent {}
+
+class Increment extends AppEvent {}
+
+class Decrement extends AppEvent {}
+
+class SelectedDate extends AppEvent {
+  DateRangePickerSelectionChangedArgs args;
+  SelectedDate({this.args});
+}

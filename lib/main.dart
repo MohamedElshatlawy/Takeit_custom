@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:v_room_app/Blocs/availableTimeHome_bloc.dart';
+import 'package:v_room_app/Blocs/booking_bloc.dart';
 import 'package:v_room_app/Blocs/forget_password_bloc.dart';
 import 'package:v_room_app/Blocs/home_bloc.dart';
 import 'package:v_room_app/Blocs/login_bloc.dart';
@@ -59,15 +60,16 @@ class MyMaterial extends ConsumerWidget {
           BlocProvider<AvailableTimeHomeBloc>(
               create: (_) => AvailableTimeHomeBloc()),
           BlocProvider<ResturantBloc>(create: (_) => ResturantBloc()),
+          BlocProvider<BookingBolc>(create: (_) => BookingBolc()),
         ],
         child: GetMaterialApp(
           debugShowCheckedModeBanner: true,
           locale: Locale(localeApp.toString()),
           theme: ThemeData(
             primaryColor: ColorsUtils.primaryYellow,
-            scaffoldBackgroundColor: localeApp == 'en'
-                ? ColorsUtils.englishBackgroundColor
-                : ColorsUtils.arabicBackgroundColor,
+            scaffoldBackgroundColor: localeApp == 'ar'
+                ? ColorsUtils.arabicBackgroundColor
+                : ColorsUtils.englishBackgroundColor,
             fontFamily: FontUtils.CAIRO_FONT,
           ),
           supportedLocales: S.delegate.supportedLocales,

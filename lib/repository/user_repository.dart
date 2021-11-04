@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:v_room_app/models/response/booking_model.dart';
 import 'package:v_room_app/models/response/login_model.dart';
 import 'package:v_room_app/models/response/map_model.dart';
 import 'package:v_room_app/models/response/resturant_model.dart';
@@ -97,6 +98,19 @@ class UserRepository {
     return MapListModel.fromJson(await NetworkCall.makeCall(
       endPoint: 'api/cuisines',
       method: HttpMethod.GET,
+    ));
+  }
+
+  Future<BookingModel> bookingRequest(
+      String datePicker, String numberOfGuests) async {
+    Map<String, dynamic> data = {
+      "date": datePicker,
+      "guests": numberOfGuests,
+    };
+    return BookingModel.fromJson(await NetworkCall.makeCall(
+      endPoint: 'api/branch/1/available-slots',
+      method: HttpMethod.GET,
+      queryParams: data,
     ));
   }
 }
