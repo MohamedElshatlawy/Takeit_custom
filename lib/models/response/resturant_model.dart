@@ -31,9 +31,9 @@ class ResponseModel {
   int restaurantId;
   String name;
   String branchName;
-  String config;
+  Config config;
   String logo;
-  List<Asset> assets;
+  List<dynamic> assets;
   WorkingHours workingHours;
   List<Cuisine> cuisines;
   String location;
@@ -43,9 +43,9 @@ class ResponseModel {
         restaurantId: json["restaurantId"],
         name: json["name"],
         branchName: json["branchName"],
-        config: json["config"],
+        config: Config.fromJson(json["config"]),
         logo: json["logo"],
-        assets: List<Asset>.from(json["assets"].map((x) => Asset.fromJson(x))),
+        assets: List<dynamic>.from(json["assets"].map((x) => x)),
         workingHours: WorkingHours.fromJson(json["workingHours"]),
         cuisines: List<Cuisine>.from(
             json["cuisines"].map((x) => Cuisine.fromJson(x))),
@@ -57,64 +57,32 @@ class ResponseModel {
         "restaurantId": restaurantId,
         "name": name,
         "branchName": branchName,
-        "config": config,
+        "config": config.toJson(),
         "logo": logo,
-        "assets": List<dynamic>.from(assets.map((x) => x.toJson())),
+        "assets": List<dynamic>.from(assets.map((x) => x)),
         "workingHours": workingHours.toJson(),
         "cuisines": List<dynamic>.from(cuisines.map((x) => x.toJson())),
         "location": location,
       };
 }
 
-class Asset {
-  Asset({
-    this.id,
-    this.url,
-    this.type,
-    this.tags,
+class Config {
+  Config({
+    this.reservationPeriod,
+    this.maxFreeSeatsPerReservation,
   });
 
-  int id;
-  String url;
-  String type;
-  List<Tag> tags;
+  int reservationPeriod;
+  int maxFreeSeatsPerReservation;
 
-  factory Asset.fromJson(Map<String, dynamic> json) => Asset(
-        id: json["id"],
-        url: json["url"],
-        type: json["type"],
-        tags: List<Tag>.from(json["tags"].map((x) => Tag.fromJson(x))),
+  factory Config.fromJson(Map<String, dynamic> json) => Config(
+        reservationPeriod: json["reservationPeriod"],
+        maxFreeSeatsPerReservation: json["maxFreeSeatsPerReservation"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "url": url,
-        "type": type,
-        "tags": List<dynamic>.from(tags.map((x) => x.toJson())),
-      };
-}
-
-class Tag {
-  Tag({
-    this.id,
-    this.name,
-    this.merchant,
-  });
-
-  int id;
-  String name;
-  dynamic merchant;
-
-  factory Tag.fromJson(Map<String, dynamic> json) => Tag(
-        id: json["id"],
-        name: json["name"],
-        merchant: json["merchant"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "merchant": merchant,
+        "reservationPeriod": reservationPeriod,
+        "maxFreeSeatsPerReservation": maxFreeSeatsPerReservation,
       };
 }
 
@@ -140,6 +108,23 @@ class Cuisine {
 
 class WorkingHours {
   WorkingHours({
+    this.shiftsTiming,
+  });
+
+  List<ShiftsTiming> shiftsTiming;
+
+  factory WorkingHours.fromJson(Map<String, dynamic> json) => WorkingHours(
+        shiftsTiming: List<ShiftsTiming>.from(
+            json["shiftsTiming"].map((x) => ShiftsTiming.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "shiftsTiming": List<dynamic>.from(shiftsTiming.map((x) => x.toJson())),
+      };
+}
+
+class ShiftsTiming {
+  ShiftsTiming({
     this.from,
     this.to,
   });
@@ -147,7 +132,7 @@ class WorkingHours {
   String from;
   String to;
 
-  factory WorkingHours.fromJson(Map<String, dynamic> json) => WorkingHours(
+  factory ShiftsTiming.fromJson(Map<String, dynamic> json) => ShiftsTiming(
         from: json["from"],
         to: json["to"],
       );

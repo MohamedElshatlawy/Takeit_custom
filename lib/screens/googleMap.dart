@@ -300,10 +300,10 @@ class _MapsState extends State<Maps> with SingleTickerProviderStateMixin {
                                   children: [
                                     Text(
                                       model.responseModel[index].workingHours
-                                          .from,
+                                          .shiftsTiming[index].from,
                                     ),
-                                    Text(model
-                                        .responseModel[index].workingHours.to),
+                                    Text(model.responseModel[index].workingHours
+                                        .shiftsTiming[index].from),
                                   ],
                                 ),
                               ],

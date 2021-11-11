@@ -113,7 +113,8 @@ class _ResturantDetailsState extends State<ResturantDetails> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomListTitle(
-                            title: state.resturantModel.responseModel.config,
+                            title:
+                                state.resturantModel.responseModel.branchName,
                             trailing: CustomRoundedButton(
                               width: 150.w,
                               backgroundColor: ColorsUtils.primaryGreen,
@@ -128,19 +129,32 @@ class _ResturantDetailsState extends State<ResturantDetails> {
                               title: 'workingHours :',
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CustomText(
-                                    text: state.resturantModel.responseModel
-                                        .workingHours.from,
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  CustomText(
-                                    text: state.resturantModel.responseModel
-                                        .workingHours.to,
-                                  ),
-                                ],
+                                children: List.generate(
+                                    state.resturantModel.responseModel
+                                        .workingHours.shiftsTiming.length,
+                                    (index) => Row(
+                                          children: [
+                                            CustomText(
+                                              text: state
+                                                  .resturantModel
+                                                  .responseModel
+                                                  .workingHours
+                                                  .shiftsTiming[index]
+                                                  .from,
+                                            ),
+                                            SizedBox(
+                                              width: 15.w,
+                                            ),
+                                            CustomText(
+                                              text: state
+                                                  .resturantModel
+                                                  .responseModel
+                                                  .workingHours
+                                                  .shiftsTiming[index]
+                                                  .to,
+                                            ),
+                                          ],
+                                        )),
                               )),
                           Container(
                             margin: EdgeInsets.all(10),

@@ -116,34 +116,39 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             Container(
               height: 250.h,
               width: double.infinity,
-              child: Carousel(
-                autoplay: true,
-                dotBgColor: Colors.transparent,
-                dotColor: ColorsUtils.greyTextColor,
-                dotIncreasedColor: ColorsUtils.primaryGreen,
-                dotSize: 8,
-                images: [
-                  Image.asset(
-                    'assets/images/pic4.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    S.current.logoImage,
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'assets/images/pic1.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'assets/images/pic3.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'assets/images/pic2.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                ],
+              margin: EdgeInsets.all(10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                child: Carousel(
+                  autoplayDuration: Duration(seconds: 5),
+                  autoplay: true,
+                  dotBgColor: Colors.transparent,
+                  dotColor: ColorsUtils.greyTextColor,
+                  dotIncreasedColor: ColorsUtils.primaryGreen,
+                  dotSize: 8,
+                  images: [
+                    Image.asset(
+                      'assets/images/pic4.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                    Image.asset(
+                      S.current.logoImage,
+                      fit: BoxFit.cover,
+                    ),
+                    Image.asset(
+                      'assets/images/pic1.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                    Image.asset(
+                      'assets/images/pic3.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                    Image.asset(
+                      'assets/images/pic2.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -201,12 +206,25 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             physics: BouncingScrollPhysics(),
                             itemCount: userInfo.length,
                             itemBuilder: (context, index) {
-                              var timeFormate =
-                                  userInfo[index].workingHours.from;
-                              List fromTimeformate = timeFormate.split(':');
-                              var timeFormateTo =
-                                  userInfo[index].workingHours.to;
-                              List toTimeformate = timeFormateTo.split(':');
+                              var timeFormateFrom = List.generate(
+                                  userInfo[index]
+                                      .workingHours
+                                      .shiftsTiming
+                                      .length,
+                                  (i) => userInfo[index]
+                                      .workingHours
+                                      .shiftsTiming[i]
+                                      .from).toString().split(':');
+
+                              var timeFormateTo = List.generate(
+                                  userInfo[index]
+                                      .workingHours
+                                      .shiftsTiming
+                                      .length,
+                                  (i) => userInfo[index]
+                                      .workingHours
+                                      .shiftsTiming[i]
+                                      .to).toString().split(':');
 
                               return Dismissible(
                                 key: UniqueKey(),
@@ -242,9 +260,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                            "From : ${fromTimeformate[0]}:${fromTimeformate[1]} AM"),
+                                            "From : ${timeFormateFrom[0]}:${timeFormateFrom[1]} AM"),
                                         Text(
-                                            "To :${toTimeformate[0]}:${toTimeformate[1]} PM"),
+                                            "To :${timeFormateTo[0]}:${timeFormateTo[1]} PM"),
                                       ],
                                     ),
                                     title: Row(

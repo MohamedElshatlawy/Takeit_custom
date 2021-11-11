@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:v_room_app/App/app_event.dart';
 import 'package:v_room_app/App/app_state.dart';
+import 'package:v_room_app/models/response/available_dates.dart';
 import 'package:v_room_app/models/response/booking_model.dart';
 import 'package:v_room_app/repository/user_repository.dart';
 import 'package:v_room_app/screens/home.dart';
@@ -18,6 +20,8 @@ class BookingBolc extends Bloc<AppEvent, AppState> {
   int count = 1;
   int previousIndex = 0;
   String selectedTime;
+  String startDate;
+  String endDate;
 
   BookingBolc() : super(Start());
 
@@ -43,6 +47,7 @@ class BookingBolc extends Bloc<AppEvent, AppState> {
                   children: [
                     ListView.builder(
                         shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
                         itemCount: response.responseModel.data.length,
                         itemBuilder: (context, index) {
                           // print(
@@ -119,11 +124,14 @@ class BookingBolc extends Bloc<AppEvent, AppState> {
       }
     }
     if (event is SelectedDate) {
-      yield Loading();
       selectedDate =
           DateFormat('dd/MM/yyyy').format(event.args.value).toString();
+      AvailableDates response = await UserRepository().availableDatesRequest();
+      startDate = response.responseModel.data.first;
+      endDate = response.responseModel.data.last;
       yield Loaded();
     }
+
     if (event is Increment) {
       yield Start();
       count = count + 1;
@@ -131,10 +139,10 @@ class BookingBolc extends Bloc<AppEvent, AppState> {
     }
     if (event is Decrement) {
       yield Start();
-      if (count <= 1) {
-        return;
+      if (count >= 2) {
+        count = count - 1;
       }
-      count = count - 1;
+
       yield Loaded();
     }
   }

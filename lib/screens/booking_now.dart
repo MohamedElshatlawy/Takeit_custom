@@ -22,7 +22,8 @@ class _BookingNowScreenState extends State<BookingNowScreen> {
     // TODO: implement initState
     super.initState();
     context.read<BookingBolc>().add(SelectedDate(
-        args: DateRangePickerSelectionChangedArgs(DateTime.now())));
+          args: DateRangePickerSelectionChangedArgs(DateTime.now()),
+        ));
   }
 
   @override
@@ -42,12 +43,25 @@ class _BookingNowScreenState extends State<BookingNowScreen> {
           }
           return Column(
             children: <Widget>[
-              SfDateRangePicker(
-                onSelectionChanged:
-                    (DateRangePickerSelectionChangedArgs args) => context
-                        .read<BookingBolc>()
-                        .add(SelectedDate(args: args)),
-              ),
+              state is Loaded
+                  ? SfDateRangePicker(
+                      minDate:
+                          DateTime.parse(context.read<BookingBolc>().startDate),
+                      maxDate:
+                          DateTime.parse(context.read<BookingBolc>().endDate),
+                      onSelectionChanged:
+                          (DateRangePickerSelectionChangedArgs args) =>
+                              context.read<BookingBolc>().add(SelectedDate(
+                                    args: args,
+                                  )),
+                    )
+                  : Container(
+                      height: 300.h,
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        color: ColorsUtils.primaryGreen,
+                      )),
+                    ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

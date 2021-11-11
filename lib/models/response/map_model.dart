@@ -94,6 +94,23 @@ class Cuisine {
 
 class WorkingHours {
   WorkingHours({
+    this.shiftsTiming,
+  });
+
+  List<ShiftsTiming> shiftsTiming;
+
+  factory WorkingHours.fromJson(Map<String, dynamic> json) => WorkingHours(
+        shiftsTiming: List<ShiftsTiming>.from(
+            json["shiftsTiming"].map((x) => ShiftsTiming.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "shiftsTiming": List<dynamic>.from(shiftsTiming.map((x) => x.toJson())),
+      };
+}
+
+class ShiftsTiming {
+  ShiftsTiming({
     this.from,
     this.to,
   });
@@ -101,7 +118,7 @@ class WorkingHours {
   String from;
   String to;
 
-  factory WorkingHours.fromJson(Map<String, dynamic> json) => WorkingHours(
+  factory ShiftsTiming.fromJson(Map<String, dynamic> json) => ShiftsTiming(
         from: json["from"],
         to: json["to"],
       );

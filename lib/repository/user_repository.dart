@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:v_room_app/models/response/available_dates.dart';
 import 'package:v_room_app/models/response/booking_model.dart';
 import 'package:v_room_app/models/response/login_model.dart';
 import 'package:v_room_app/models/response/map_model.dart';
@@ -111,6 +112,13 @@ class UserRepository {
       endPoint: 'api/branch/1/available-slots',
       method: HttpMethod.GET,
       queryParams: data,
+    ));
+  }
+
+  Future<AvailableDates> availableDatesRequest() async {
+    return AvailableDates.fromJson(await NetworkCall.makeCall(
+      endPoint: 'api/branch/1/available-dates',
+      method: HttpMethod.GET,
     ));
   }
 }
