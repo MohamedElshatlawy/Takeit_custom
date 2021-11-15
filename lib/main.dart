@@ -19,6 +19,8 @@ import 'package:v_room_app/utils/ColorsUtils.dart';
 import 'package:v_room_app/utils/Constants.dart';
 import 'package:v_room_app/utils/FontsUtils.dart';
 import 'package:v_room_app/utils/PreferenceManger.dart';
+
+import 'Blocs/profile_bloc.dart';
 import 'generated/l10n.dart';
 
 main(List<String> args) async {
@@ -61,6 +63,7 @@ class MyMaterial extends ConsumerWidget {
               create: (_) => AvailableTimeHomeBloc()),
           BlocProvider<ResturantBloc>(create: (_) => ResturantBloc()),
           BlocProvider<BookingBolc>(create: (_) => BookingBolc()),
+          BlocProvider<ProfileBloc>(create: (_) => ProfileBloc()),
         ],
         child: GetMaterialApp(
           debugShowCheckedModeBanner: true,

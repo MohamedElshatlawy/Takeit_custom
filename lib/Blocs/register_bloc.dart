@@ -35,6 +35,8 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
     return super.close();
   }
 
+  UserModel response;
+
   @override
   Stream<AppState> mapEventToState(AppEvent event) async* {
     if (event is Click) {
@@ -43,9 +45,11 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
       } else {
         try {
           yield Loading();
-          UserModel response = await UserRepository().registerRequest(
+          response = await UserRepository().registerRequest(
               _name.value, "966${_phone.value}", _password.value);
-          // print("rrrrrrrrr${response.responseModel.status}");
+
+          print("response of register Request${response.responseModel}");
+
           if (response.code == 400 &&
               response.responseModel.message == 'error.validation') {
             Fluttertoast.showToast(msg: 'برجاء ادخال رقم الجوال بصيغه صحيحه');
@@ -61,6 +65,7 @@ class RegisterBloc extends Bloc<AppEvent, AppState> {
             Fluttertoast.showToast(msg: response.responseModel.activationCode);
             PreferenceManager.getInstance().saveString(
                 'registerResponseLogin', response.responseModel.login);
+
             print("kkkkkkkkk${response.responseModel.login}");
             yield Done();
             Get.off(() => VerificationCode());

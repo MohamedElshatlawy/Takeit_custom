@@ -94,6 +94,11 @@ class SignUp extends StatelessWidget {
                           pressed: () {
                             if (_globalKey.currentState.validate()) {
                               context.read<RegisterBloc>().add(Click());
+                              // if (state is Done) {
+                              //   context.read<ProfileBloc>().userModel =
+                              //       BlocProvider.of<RegisterBloc>(context)
+                              //           .response;
+                              // }
                             } else {
                               return;
                             }

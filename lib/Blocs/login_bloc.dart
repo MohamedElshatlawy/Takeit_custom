@@ -28,16 +28,20 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
     return super.close();
   }
 
+  LoginModel respose;
+
   @override
   Stream<AppState> mapEventToState(AppEvent event) async* {
     if (event is Click) {
       try {
         yield Loading();
-        LoginModel respose = await UserRepository().loginRequest(
+        respose = await UserRepository().loginRequest(
             _password.value,
             "966${_userName.value}",
             _remeberMe.value == null ? false : _remeberMe.value);
-        print("ddddddddddddddddddd${respose}");
+
+        print("respose of login Request${respose.responseModel.name}");
+
         if (respose.code == 401) {
           Fluttertoast.showToast(msg: respose.message);
           yield Start();

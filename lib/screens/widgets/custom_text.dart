@@ -6,12 +6,15 @@ class CustomText extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final TextAlign textAlign;
+  final TextOverflow overflow;
+
   CustomText(
       {Key key,
       this.text,
       this.textColor,
       this.fontSize,
       this.fontWeight,
+      this.overflow,
       this.textAlign})
       : super(key: key);
 
@@ -24,6 +27,7 @@ class CustomText extends StatelessWidget {
         color: textColor,
         fontSize: fontSize,
         fontWeight: fontWeight ?? FontWeight.normal,
+        overflow: overflow,
       ),
     );
   }
