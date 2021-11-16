@@ -18,5 +18,43 @@
     "aribianFood": "Arabian Food",
     "booking": "Book Now",
     "avaliableTime": "Available Booking Times",
-    "rememberMe": "Remember Me"
+    "rememberMe": "Remember Me",
+    "personalAccount": "personal Account",
+    "enterTheName": "Enter The Name",
+    "enterThePhoneNo": "Enter The Phone Number",
+    "edit": "Edit",
+    "save": "Save",
+    "enterThePassCorrectly": "Enter The Password Correctly",
+    "notification": "Notification",
+    "reservations": "Reservations",
+    "status": "Accepted",
+    "restaurantName": "Restaurant Name",
+    "restaurantAddress": "Restaurant Address",
+    "person": "person",
+    "cancel": "Cancel",
+    "home": "Home",
+    "reserveEdit": "You can Edit The reservation Before 08:00",
+    "reserveCancel": "You can Cancel The reservation Before 08:00",
+    "reserveBarCode": "Reserve By Barcode",
+    "addToCalender": "Add To Calender",
+    "occasion": "What 's The Occasion",
+    "birthDay": "BirthDays",
+    "wedding": "Weddings",
+    "meetings": "Meetings",
+    "userName": "User1",
+    "waitingStatus": "waiting",
+    "now": "Now",
+    "bookingAccepted": "Reservations Accepted"
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -3,12 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/about.dart';
 import 'package:v_room_app/screens/auth/login.dart';
 import 'package:v_room_app/screens/bottomSheet.dart';
 import 'package:v_room_app/screens/contact.dart';
+import 'package:v_room_app/screens/notification.dart';
 import 'package:v_room_app/screens/order.dart';
 import 'package:v_room_app/screens/pay.dart';
+import 'package:v_room_app/screens/reservations.dart';
 import 'package:v_room_app/screens/widgets/CustomListTitle.dart';
 import 'package:v_room_app/screens/widgets/custom_text.dart';
 import 'package:v_room_app/screens/widgets/profile.dart';
@@ -58,17 +61,34 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       )),
                 ),
                 ListView(
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  padding: EdgeInsets.zero,
+                  padding: EdgeInsets.only(bottom: 10),
                   children: ListTile.divideTiles(
                     context: context,
                     tiles: [
                       CustomListTitle(
-                        title: 'الملف الشخصي',
+                        title: S.current.personalAccount,
                         dense: true,
                         iconData: Icons.person,
                         onTap: () {
                           Get.to(() => Profile());
+                        },
+                      ),
+                      CustomListTitle(
+                        title: S.current.notification,
+                        dense: true,
+                        iconData: Icons.notifications,
+                        onTap: () {
+                          Get.to(() => NotificationScreen());
+                        },
+                      ),
+                      CustomListTitle(
+                        title: S.current.reservations,
+                        dense: true,
+                        iconData: Icons.payment,
+                        onTap: () {
+                          Get.to(() => Reservations());
                         },
                       ),
                       CustomListTitle(

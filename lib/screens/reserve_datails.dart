@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/widgets/CustomListTitle.dart';
 import 'package:v_room_app/screens/widgets/custom_appbar.dart';
 import 'package:v_room_app/screens/widgets/custom_rounded_btn.dart';
 import 'package:v_room_app/screens/widgets/custom_text.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
 
 class ReserveDetails extends StatelessWidget {
@@ -12,7 +12,7 @@ class ReserveDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'الحجز 37737373',
+        title: '#1234',
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -22,7 +22,12 @@ class ReserveDetails extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    leading: Image.asset('assets/images/logo.jpg'),
+                    leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          'assets/images/pic1.jpg',
+                          fit: BoxFit.fill,
+                        )),
                     title: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,19 +35,31 @@ class ReserveDetails extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CustomText(
-                              text: 'تيك ات',
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: ColorsUtils.kButtonPrimaryColor,
+                                  size: 15,
+                                ),
+                                CustomText(
+                                  text: '1.0',
+                                ),
+                              ],
                             ),
-                            TextButton(
-                              onPressed: () {},
-                              child: CustomText(
-                                text: 'حظر',
-                              ),
-                            )
+                            // TextButton(
+                            //   onPressed: () {},
+                            //   child: CustomText(
+                            //     text: 'Status',
+                            //   ),
+                            // )
+                            CustomText(
+                              text: S.current.status,
+                            ),
                           ],
                         ),
                         CustomText(
-                          text: 'تيك ات',
+                          text: S.current.restaurantName,
                           fontWeight: FontWeight.bold,
                         )
                       ],
@@ -51,30 +68,38 @@ class ReserveDetails extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.location_on),
+                            Icon(
+                              Icons.location_on,
+                              color: ColorsUtils.hintTextColor,
+                            ),
                             CustomText(
-                              text: ' تيك تيك تيك تيك  ات',
+                              text: S.current.restaurantAddress,
                             ),
                           ],
                         ),
-                        Container(
-                          // width: 150.w,
-                          height: 50.h,
-                          child: CustomRoundedButton(
-                            text: 'حجز 2883883838',
-                            backgroundColor: ColorsUtils.hintGrayColor,
-                            borderColor: ColorsUtils.hintGrayColor,
-                            textColor: ColorsUtils.whiteColor,
-                            load: false,
-                            pressed: () {
-                              Get.back();
-                            },
-                          ),
-                        ),
+
+                        // Container(
+                        //   // width: 150.w,
+                        //   height: 50.h,
+                        //   child: CustomRoundedButton(
+                        //     text: 'حجز 2883883838',
+                        //     backgroundColor: ColorsUtils.hintGrayColor,
+                        //     borderColor: ColorsUtils.hintGrayColor,
+                        //     textColor: ColorsUtils.whiteColor,
+                        //     load: false,
+                        //     pressed: () {
+                        //       Get.back();
+                        //     },
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     width: double.infinity,
                     child: IntrinsicHeight(
                       child: Card(
@@ -93,21 +118,21 @@ class ReserveDetails extends StatelessWidget {
                                   children: [
                                     Icon(Icons.person),
                                     CustomText(
-                                      text: 'شخص',
+                                      text: S.current.person,
                                     ),
                                   ],
                                 ),
-                                VerticalDivider(
-                                  color: ColorsUtils.greyTextColor,
-                                ),
-                                Column(
-                                  children: [
-                                    Icon(Icons.calendar_view_month_sharp),
-                                    CustomText(
-                                      text: 'tgtg',
-                                    ),
-                                  ],
-                                ),
+                                // VerticalDivider(
+                                //   color: ColorsUtils.greyTextColor,
+                                // ),
+                                // Column(
+                                //   children: [
+                                //     Icon(Icons.calendar_view_month_sharp),
+                                //     CustomText(
+                                //       text: 'tgtg',
+                                //     ),
+                                //   ],
+                                // ),
                                 VerticalDivider(
                                   color: ColorsUtils.greyTextColor,
                                 ),
@@ -137,7 +162,7 @@ class ReserveDetails extends StatelessWidget {
                                   children: [
                                     Icon(Icons.home_work_rounded),
                                     CustomText(
-                                      text: 'داخل المنزل',
+                                      text: S.current.home,
                                     ),
                                   ],
                                 ),
@@ -147,11 +172,11 @@ class ReserveDetails extends StatelessWidget {
                     ),
                   ),
                   CustomListTitle(
-                    title: 'يمكن تعديل الطلب قبل 8:0:4',
+                    title: S.current.reserveEdit,
                     iconData: Icons.access_time,
                   ),
                   CustomListTitle(
-                    title: 'يمكن الغاء الطلب قبل 8:0:4',
+                    title: S.current.reserveCancel,
                     iconData: Icons.access_time,
                   ),
                   CustomListTitle(
@@ -161,14 +186,14 @@ class ReserveDetails extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CustomRoundedButton(
-                          text: 'تعديل',
+                          text: S.current.edit,
                           backgroundColor: Colors.transparent,
                           textColor: ColorsUtils.primaryGreen,
                           load: false,
                           pressed: () {},
                         ),
                         CustomRoundedButton(
-                          text: 'الغاء',
+                          text: S.current.cancel,
                           backgroundColor: Colors.transparent,
                           textColor: ColorsUtils.primaryGreen,
                           load: false,
@@ -191,14 +216,14 @@ class ReserveDetails extends StatelessWidget {
                     textColor: Colors.black,
                     leading: Icon(Icons.qr_code),
                     trailing: Icon(Icons.arrow_forward_ios),
-                    title: CustomText(text: 'حجز بار كود'),
+                    title: CustomText(text: S.current.reserveBarCode),
                     children: <Widget>[],
                   ),
                   ExpansionTile(
                     textColor: Colors.black,
                     leading: Icon(Icons.calendar_today),
                     trailing: Icon(Icons.arrow_forward_ios),
-                    title: CustomText(text: 'اضافه الي التقويم'),
+                    title: CustomText(text: S.current.addToCalender),
                     children: <Widget>[],
                   ),
                 ],
@@ -214,7 +239,7 @@ class ReserveDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    text: 'ماهي المناسبه',
+                    text: S.current.occasion,
                   ),
                   SizedBox(
                     height: 20.h,
@@ -234,7 +259,7 @@ class ReserveDetails extends StatelessWidget {
                                   Border.all(color: ColorsUtils.greyTextColor),
                               borderRadius: BorderRadius.circular(20)),
                           child: CustomText(
-                            text: 'اعياد ميلاد',
+                            text: S.current.birthDay,
                           ),
                         ),
                         SizedBox(
@@ -248,7 +273,7 @@ class ReserveDetails extends StatelessWidget {
                                   Border.all(color: ColorsUtils.greyTextColor),
                               borderRadius: BorderRadius.circular(20)),
                           child: CustomText(
-                            text: 'حفلات زفاف',
+                            text: S.current.wedding,
                           ),
                         ),
                         SizedBox(
@@ -262,7 +287,7 @@ class ReserveDetails extends StatelessWidget {
                                   Border.all(color: ColorsUtils.greyTextColor),
                               borderRadius: BorderRadius.circular(20)),
                           child: CustomText(
-                            text: 'اجتماعات',
+                            text: S.current.meetings,
                           ),
                         )
                       ],

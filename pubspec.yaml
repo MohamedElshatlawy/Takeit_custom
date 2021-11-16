@@ -55,7 +55,7 @@ dependencies:
   carousel_pro:
   restart_app:
   location: ^4.3.0
-#  geocoder:
+  geocoder:
 #  geolocator: ^7.7.1
   flutter_polyline_points: ^1.0.0
   syncfusion_flutter_datepicker:

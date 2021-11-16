@@ -234,6 +234,266 @@ class S {
       args: [],
     );
   }
+
+  /// `personal Account`
+  String get personalAccount {
+    return Intl.message(
+      'personal Account',
+      name: 'personalAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter The Name`
+  String get enterTheName {
+    return Intl.message(
+      'Enter The Name',
+      name: 'enterTheName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter The Phone Number`
+  String get enterThePhoneNo {
+    return Intl.message(
+      'Enter The Phone Number',
+      name: 'enterThePhoneNo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message(
+      'Edit',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter The Password Correctly`
+  String get enterThePassCorrectly {
+    return Intl.message(
+      'Enter The Password Correctly',
+      name: 'enterThePassCorrectly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification`
+  String get notification {
+    return Intl.message(
+      'Notification',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reservations`
+  String get reservations {
+    return Intl.message(
+      'Reservations',
+      name: 'reservations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accepted`
+  String get status {
+    return Intl.message(
+      'Accepted',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restaurant Name`
+  String get restaurantName {
+    return Intl.message(
+      'Restaurant Name',
+      name: 'restaurantName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restaurant Address`
+  String get restaurantAddress {
+    return Intl.message(
+      'Restaurant Address',
+      name: 'restaurantAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `person`
+  String get person {
+    return Intl.message(
+      'person',
+      name: 'person',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can Edit The reservation Before 08:00`
+  String get reserveEdit {
+    return Intl.message(
+      'You can Edit The reservation Before 08:00',
+      name: 'reserveEdit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can Cancel The reservation Before 08:00`
+  String get reserveCancel {
+    return Intl.message(
+      'You can Cancel The reservation Before 08:00',
+      name: 'reserveCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reserve By Barcode`
+  String get reserveBarCode {
+    return Intl.message(
+      'Reserve By Barcode',
+      name: 'reserveBarCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add To Calender`
+  String get addToCalender {
+    return Intl.message(
+      'Add To Calender',
+      name: 'addToCalender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What 's The Occasion`
+  String get occasion {
+    return Intl.message(
+      'What \'s The Occasion',
+      name: 'occasion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `BirthDays`
+  String get birthDay {
+    return Intl.message(
+      'BirthDays',
+      name: 'birthDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weddings`
+  String get wedding {
+    return Intl.message(
+      'Weddings',
+      name: 'wedding',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Meetings`
+  String get meetings {
+    return Intl.message(
+      'Meetings',
+      name: 'meetings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User1`
+  String get userName {
+    return Intl.message(
+      'User1',
+      name: 'userName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `waiting`
+  String get waitingStatus {
+    return Intl.message(
+      'waiting',
+      name: 'waitingStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Now`
+  String get now {
+    return Intl.message(
+      'Now',
+      name: 'now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reservations Accepted`
+  String get bookingAccepted {
+    return Intl.message(
+      'Reservations Accepted',
+      name: 'bookingAccepted',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
