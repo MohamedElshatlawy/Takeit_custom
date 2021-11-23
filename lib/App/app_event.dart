@@ -1,5 +1,4 @@
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:v_room_app/models/response/login_model.dart';
 
 abstract class AppEvent {}
 
@@ -30,7 +29,7 @@ class SelectedDate extends AppEvent {
 }
 
 class GetInfo extends AppEvent {
-  LoginModel data;
+  var data;
 
   GetInfo({this.data});
 }

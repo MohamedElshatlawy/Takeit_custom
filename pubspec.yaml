@@ -56,7 +56,7 @@ dependencies:
   restart_app:
   location: ^4.3.0
   geocoder:
-#  geolocator: ^7.7.1
+  geolocator: ^7.7.0
   flutter_polyline_points: ^1.0.0
   syncfusion_flutter_datepicker:
 

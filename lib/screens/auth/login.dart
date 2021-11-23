@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:v_room_app/App/app_event.dart';
 import 'package:v_room_app/App/app_state.dart';
 import 'package:v_room_app/Blocs/login_bloc.dart';
-import 'package:v_room_app/Blocs/profile_bloc.dart';
 import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/auth/forget_password.dart';
 import 'package:v_room_app/screens/auth/signup.dart';
@@ -92,11 +91,6 @@ class _LoginState extends State<Login> {
                           pressed: () async {
                             if (_globalKey.currentState.validate()) {
                               await context.read<LoginBloc>().add(Click());
-                              if (state is Done) {
-                                context.read<ProfileBloc>().add(GetInfo(
-                                    data: BlocProvider.of<LoginBloc>(context)
-                                        .respose));
-                              }
                             } else {
                               return;
                             }

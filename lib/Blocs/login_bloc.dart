@@ -40,7 +40,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
             "966${_userName.value}",
             _remeberMe.value == null ? false : _remeberMe.value);
 
-        print("respose of login Request${respose.responseModel.name}");
+        // print("respose of login Request ${respose.responseModel}");
 
         if (respose.code == 401) {
           Fluttertoast.showToast(msg: respose.message);
@@ -50,6 +50,7 @@ class LoginBloc extends Bloc<AppEvent, AppState> {
           PreferenceManager.getInstance()
               .saveString('token', respose.responseModel.idToken);
           yield Done();
+
           Get.offAll(() => Home());
         }
       } catch (error) {
