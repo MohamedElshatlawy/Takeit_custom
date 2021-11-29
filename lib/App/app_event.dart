@@ -27,3 +27,5 @@ class SelectedDate extends AppEvent {
   DateRangePickerSelectionChangedArgs args;
   SelectedDate({this.args});
 }
+
+class Edit extends AppEvent {}

@@ -6,8 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:v_room_app/Blocs/account_bloc.dart';
 import 'package:v_room_app/Blocs/availableTimeHome_bloc.dart';
 import 'package:v_room_app/Blocs/booking_bloc.dart';
+import 'package:v_room_app/Blocs/change_password_bloc.dart';
 import 'package:v_room_app/Blocs/forget_password_bloc.dart';
 import 'package:v_room_app/Blocs/home_bloc.dart';
 import 'package:v_room_app/Blocs/login_bloc.dart';
@@ -19,6 +21,7 @@ import 'package:v_room_app/utils/ColorsUtils.dart';
 import 'package:v_room_app/utils/Constants.dart';
 import 'package:v_room_app/utils/FontsUtils.dart';
 import 'package:v_room_app/utils/PreferenceManger.dart';
+import 'package:v_room_app/utils/TokenUtil.dart';
 import 'generated/l10n.dart';
 
 main(List<String> args) async {
@@ -61,6 +64,8 @@ class MyMaterial extends ConsumerWidget {
               create: (_) => AvailableTimeHomeBloc()),
           BlocProvider<ResturantBloc>(create: (_) => ResturantBloc()),
           BlocProvider<BookingBolc>(create: (_) => BookingBolc()),
+          BlocProvider<AccountBloc>(create: (_) => AccountBloc()),
+          BlocProvider<ChangPaawordeBloc>(create: (_) => ChangPaawordeBloc()),
         ],
         child: GetMaterialApp(
           debugShowCheckedModeBanner: true,

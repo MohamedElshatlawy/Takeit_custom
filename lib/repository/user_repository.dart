@@ -1,12 +1,17 @@
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:v_room_app/models/response/account_model.dart';
 import 'package:v_room_app/models/response/available_dates.dart';
 import 'package:v_room_app/models/response/booking_model.dart';
+import 'package:v_room_app/models/response/change_password_model.dart';
 import 'package:v_room_app/models/response/login_model.dart';
 import 'package:v_room_app/models/response/map_model.dart';
 import 'package:v_room_app/models/response/resturant_model.dart';
 import 'package:v_room_app/models/response/user_model.dart';
 import 'package:v_room_app/network/networkCallback/NetworkCallback.dart';
 import 'package:v_room_app/utils/Enums.dart';
+import 'package:v_room_app/utils/PreferenceManger.dart';
+import 'package:v_room_app/utils/TokenUtil.dart';
 
 class UserRepository {
   Future<UserModel> registerRequest(
@@ -120,5 +125,47 @@ class UserRepository {
       endPoint: 'api/branch/1/available-dates',
       method: HttpMethod.GET,
     ));
+  }
+
+  Future<AccountModel> accountRequest() async {
+    return AccountModel.fromJson(await NetworkCall.makeCall(
+        endPoint: 'api/account', method: HttpMethod.GET));
+  }
+
+  Future<ChangePasswordModel> changePasswordRequest(
+      String currentPassword, String newPassword) async {
+    var data = jsonEncode(<String, dynamic>{
+      "currentPassword": currentPassword,
+      "newPassword": newPassword,
+    });
+    return ChangePasswordModel.fromJson(await NetworkCall.makeCall(
+        endPoint: 'api/account/change-password',
+        method: HttpMethod.POST,
+        requestBody: data));
+  }
+
+  Future<AccountModel> editProfileRequest(
+      String name,
+      email,
+      activated,
+      langKey,
+      createdBy,
+      createdDate,
+      lastModifiedBy,
+      lastModifiedDate,
+      userType) async {
+    var data = jsonEncode(<String, dynamic>{
+      "name": name,
+      "email": email,
+      "activated": activated,
+      "langKey": langKey,
+      "createdBy": createdBy,
+      "createdDate": createdDate,
+      "lastModifiedBy": lastModifiedBy,
+      "lastModifiedDate": lastModifiedDate,
+      "userType": userType,
+    });
+    return AccountModel.fromJson(await NetworkCall.makeCall(
+        endPoint: 'api/account', method: HttpMethod.POST, requestBody: data));
   }
 }

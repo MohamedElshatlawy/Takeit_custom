@@ -1,3 +1,4 @@
+import 'package:v_room_app/models/response/account_model.dart';
 import 'package:v_room_app/models/response/home_model.dart';
 import 'package:v_room_app/models/response/map_model.dart';
 import 'package:v_room_app/models/response/resturant_model.dart';
@@ -42,6 +43,11 @@ class AvailbleTime extends AppState {
   AvailbleTime({this.availbleTime});
   @override
   List<Object> get props => [availbleTime];
+}
+
+class AccountState extends AppState {
+  AccountModel accountModel;
+  AccountState({this.accountModel});
 }
 
 class Empty extends AppState {}

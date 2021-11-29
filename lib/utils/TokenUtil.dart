@@ -6,14 +6,19 @@ class TokenUtil {
 
   static Future<void> loadTokenToMemory() async {
     _token = await PreferenceManager.getInstance().getString(Constants.token);
+    print("loadTokenToMemory${_token}");
   }
 
   static String getTokenFromMemory() {
+    print("getTokenFromMemory${_token}");
+
     return _token;
   }
 
   static void saveToken(String token) {
     PreferenceManager.getInstance().saveString(Constants.token, token);
+    print("saveToken${token}");
+
     loadTokenToMemory();
   }
 

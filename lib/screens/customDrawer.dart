@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:v_room_app/screens/about.dart';
+import 'package:v_room_app/screens/auth/chage_password.dart';
 import 'package:v_room_app/screens/auth/login.dart';
+import 'package:v_room_app/screens/auth/reset_password.dart';
 import 'package:v_room_app/screens/contact.dart';
 import 'package:v_room_app/screens/order.dart';
 import 'package:v_room_app/screens/pay.dart';
+import 'package:v_room_app/screens/profile.dart';
 import 'package:v_room_app/screens/widgets/CustomListTitle.dart';
 import 'package:v_room_app/screens/bottomSheet.dart';
 import 'package:v_room_app/screens/widgets/custom_text.dart';
@@ -36,10 +39,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
       // borderRadius: BorderRadius.only(
       //     topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
       child: SizedBox(
-        height: 850.h,
+        height: 900.h,
         width: 230.w,
         child: Drawer(
-          child: Column(
+          child: ListView(
             children: [
               SizedBox(
                 height: 130.h,
@@ -60,6 +63,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               ListView(
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.zero,
                 children: ListTile.divideTiles(
                   context: context,
@@ -115,11 +119,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       iconData: null,
                     ),
                     CustomListTitle(
+                      title: 'تغير كلمه المرور',
+                      dense: true,
+                      iconData: null,
+                      onTap: () => Get.to(() => ChangePassword()),
+                    ),
+                    CustomListTitle(
                       title: 'تسحيل الخروج',
                       dense: true,
                       iconData: null,
                       onTap: () {
                         PreferenceManager.getInstance().remove('token');
+
                         Get.offAll(() => Login());
                       },
                     ),
@@ -155,6 +166,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         print(
                             'aaaaaaaaaaaaaa${prefs.getString(Constants.languageCode)}');
                       },
+                    ),
+                    CustomListTitle(
+                      title: 'ملف الشخصي',
+                      dense: true,
+                      iconData: null,
+                      onTap: () => Get.to(() => Profile()),
                     ),
                     CustomListTitle(
                       title: 'نسخه 3.0.48',

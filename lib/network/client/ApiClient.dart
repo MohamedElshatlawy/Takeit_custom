@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:v_room_app/singleton/SettingsSession.dart';
+import 'package:v_room_app/utils/PreferenceManger.dart';
 import 'package:v_room_app/utils/TokenUtil.dart';
 
 import '../ServicesURLs.dart';
@@ -13,16 +14,13 @@ class ApiClient {
   static Map<String, String> headers() {
     var mHeaders = {
       HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader:
+          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5NjY1NTMzNDQ0NDEiLCJhdXRoIjoidXNlcnR5cGUuY3VzdG9tZXIiLCJleHAiOjE2MzgyODg5OTl9.qojaKTgmiEjMcg0K77AD9p2egC9B2-hGobmZIZuawyyv3hdpWniTMrXBMth46W8-iWyIy50aIQbjXR7l6TM2uQ",
     };
+
     // mHeaders["lang"] = SettingsSession.instance().languageCode != null
     //     ? SettingsSession.instance().languageCode
     //     : "ar";
-
-    // loading auth token
-    if (TokenUtil.getTokenFromMemory().isNotEmpty) {
-      mHeaders[HttpHeaders.authorizationHeader] =
-          "Bearer ${TokenUtil.getTokenFromMemory()}";
-    }
 
     return mHeaders;
   }
