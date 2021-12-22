@@ -28,8 +28,4 @@ class SelectedDate extends AppEvent {
   SelectedDate({this.args});
 }
 
-class GetInfo extends AppEvent {
-  var data;
-
-  GetInfo({this.data});
-}
+class ResetPass extends AppEvent {}

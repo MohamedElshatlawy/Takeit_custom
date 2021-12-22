@@ -44,17 +44,7 @@
     "userName": "User1",
     "waitingStatus": "waiting",
     "now": "Now",
-    "bookingAccepted": "Reservations Accepted"
-
-
-
-
-
-
-
-
-
-
-
-
+    "bookingAccepted": "Reservations Accepted",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password"
 }

@@ -44,6 +44,8 @@
     "userName": "مستخدم1",
     "waitingStatus": "انتظار",
     "now": "الان",
-    "bookingAccepted": "تم قبول الحجز"
+    "bookingAccepted": "تم قبول الحجز",
+    "currentPassword": "كلمة المرور الحاليه",
+    "newPassword": "كلمة المرور الجديده"
 
 }

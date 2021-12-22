@@ -4,6 +4,7 @@ import 'package:v_room_app/models/response/available_dates.dart';
 import 'package:v_room_app/models/response/booking_model.dart';
 import 'package:v_room_app/models/response/login_model.dart';
 import 'package:v_room_app/models/response/map_model.dart';
+import 'package:v_room_app/models/response/profile_model.dart';
 import 'package:v_room_app/models/response/resturant_model.dart';
 import 'package:v_room_app/models/response/user_model.dart';
 import 'package:v_room_app/network/networkCallback/NetworkCallback.dart';
@@ -45,6 +46,26 @@ class UserRepository {
     });
     return LoginModel.fromJson(await NetworkCall.makeCall(
       endPoint: 'api/authenticate',
+      method: HttpMethod.POST,
+      requestBody: data,
+    ));
+  }
+
+  Future<ProfileModel> getAccountDetailsRequest() async {
+    return ProfileModel.fromJson(await NetworkCall.makeCall(
+      endPoint: 'api/account',
+      method: HttpMethod.GET,
+    ));
+  }
+
+  Future<UserModel> changePasswordRequest(
+      String currentPassword, String newPassword) async {
+    var data = jsonEncode(<String, dynamic>{
+      "currentPassword": currentPassword,
+      "newPassword": newPassword,
+    });
+    return UserModel.fromJson(await NetworkCall.makeCall(
+      endPoint: 'api/account/change-password',
       method: HttpMethod.POST,
       requestBody: data,
     ));
